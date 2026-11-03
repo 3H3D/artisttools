@@ -3,27 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Ferwap Artist Portal</title>
+    <title>Artist Portal - Ferwap Music Entertainment</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="auth-body">
+<body class="landing-body">
 
-    <div class="auth-container">
-        <div class="auth-box">
-            <h2>Ferwap Portal Access</h2>
-            <p>Silakan login untuk mengakses data analitik & katalog.</p>
-            
-            <form id="login-form">
-                <input type="email" id="email" placeholder="Email" required>
-                <input type="password" id="password" placeholder="Password" required>
-                <button type="submit">Login</button>
-            </form>
-            
-            <p id="auth-error" class="error-msg"></p>
+    <!-- Header Navbar Minimalis -->
+    <header class="landing-header">
+        <div class="logo-area">
+            <span class="logo-text">Ferwap <strong>ArtistPortal.</strong></span>
         </div>
-    </div>
+        <div class="header-subtitle">Total Visibility From Consumption to Cash Out</div>
+    </header>
 
-    <!-- Script khusus untuk menangani proses login Firebase -->
+    <!-- Konten Utama ala Major Label Landing Page -->
+    <main class="landing-main">
+        <div class="hero-section">
+            <div class="hero-text">
+                <h1>Real-Time Earnings & Analytics</h1>
+                <p>Platform eksklusif bagi kreator, musisi, dan label Ferwap Music untuk memantau performa katalog, tren pendengar global, dan laporan transparan dalam satu kendali.</p>
+            </div>
+
+            <!-- Kotak Form Login yang Terintegrasi di Bawah/Tengah -->
+            <div class="landing-auth-card">
+                <h3>Sign In to Portal</h3>
+                <form id="login-form">
+                    <input type="email" id="email" placeholder="Artist / Label Email" required>
+                    <input type="password" id="password" placeholder="Password" required>
+                    <button type="submit" class="portal-login-btn">Access Dashboard</button>
+                </form>
+                <p id="auth-error" class="error-msg"></p>
+            </div>
+        </div>
+
+        <!-- Bagian Fitur / Integrasi Platform -->
+        <div class="features-preview">
+            <div class="feature-item">
+                <h4>Global Streaming Data</h4>
+                <p>Terhubung langsung dengan metrik pemutaran lintas platform digital.</p>
+            </div>
+            <div class="feature-item">
+                <h4>ISRC & Catalog Registry</h4>
+                <p>Kelola data hak cipta lagu dan metadata rilis dengan standar industri.</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer Tipis -->
+    <footer class="landing-footer">
+        <p>&copy; 2026 Ferwap Music Entertainment. All rights reserved.</p>
+    </footer>
+
+    <!-- Script Firebase Auth -->
     <script type="module" src="auth.js"></script>
 </body>
 </html>
