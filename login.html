@@ -1,60 +1,100 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Artist Portal - Ferwap Music Entertainment</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="landing-body">
+<body>
 
-    <!-- Header Navbar Minimalis -->
-    <header class="landing-header">
-        <div class="logo-area">
-            <span class="logo-text">Ferwap <strong>ArtistPortal.</strong></span>
+    <!-- Header / Main Navbar -->
+    <header class="sony-header">
+        <div class="logo-container">
+            <span class="logo-circle"></span>
+            <span class="logo-title">Ferwap <strong>ArtistPortal.</strong></span>
         </div>
-        <div class="header-subtitle">Total Visibility From Consumption to Cash Out</div>
+        <div class="header-tagline">Total Visibility From Consumption to Cash Out</div>
     </header>
 
-    <!-- Konten Utama ala Major Label Landing Page -->
-    <main class="landing-main">
-        <div class="hero-section">
-            <div class="hero-text">
-                <h1>Real-Time Earnings & Analytics</h1>
-                <p>Platform eksklusif bagi kreator, musisi, dan label Ferwap Music untuk memantau performa katalog, tren pendengar global, dan laporan transparan dalam satu kendali.</p>
-            </div>
-
-            <!-- Kotak Form Login yang Terintegrasi di Bawah/Tengah -->
-            <div class="landing-auth-card">
-                <h3>Sign In to Portal</h3>
-                <form id="login-form">
-                    <input type="email" id="email" placeholder="Artist / Label Email" required>
-                    <input type="password" id="password" placeholder="Password" required>
-                    <button type="submit" class="portal-login-btn">Access Dashboard</button>
-                </form>
-                <p id="auth-error" class="error-msg"></p>
-            </div>
+    <!-- Main Hero Section -->
+    <section class="sony-hero">
+        <div class="hero-content">
+            <h1>Real-Time Earnings & Cash-Out</h1>
+            <p>Ferwap Music provides total transparency for artists and creators to monitor catalog performance, global listening trends, and revenue reports instantly.</p>
         </div>
 
-        <!-- Bagian Fitur / Integrasi Platform -->
-        <div class="features-preview">
-            <div class="feature-item">
-                <h4>Global Streaming Data</h4>
-                <p>Terhubung langsung dengan metrik pemutaran lintas platform digital.</p>
-            </div>
-            <div class="feature-item">
-                <h4>ISRC & Catalog Registry</h4>
-                <p>Kelola data hak cipta lagu dan metadata rilis dengan standar industri.</p>
+        <!-- Portal Login Box -->
+        <div class="sony-login-box">
+            <h3>Sign In to Portal</h3>
+            <form id="login-form">
+                <input type="email" id="email" placeholder="Artist Email Address" required>
+                <input type="password" id="password" placeholder="Password" required>
+                <button type="submit" class="sony-btn-primary">Access Dashboard</button>
+            </form>
+            <p id="auth-error" class="error-msg"></p>
+        </div>
+    </section>
+
+    <!-- Real-Time Analytics & Trends Section -->
+    <section class="sony-section dark-bg">
+        <div class="section-container">
+            <h2>Real-Time Analytics & Trends</h2>
+            <p class="section-desc">Track daily and weekly streaming metrics from major digital service providers in one centralized dashboard.</p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h4>By Partner</h4>
+                    <p>Analyze earnings segmented by digital distribution platforms (Spotify, Apple Music, and more).</p>
+                </div>
+                <div class="feature-card">
+                    <h4>By Country</h4>
+                    <p>Discover precisely where your fan base and music consumption are expanding across the globe.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Real-Time Trends</h4>
+                    <p>Comprehensive data integration to inspect track performance and album metrics at a granular level.</p>
+                </div>
             </div>
         </div>
-    </main>
+    </section>
 
-    <!-- Footer Tipis -->
-    <footer class="landing-footer">
-        <p>&copy; 2026 Ferwap Music Entertainment. All rights reserved.</p>
+    <!-- Getting Started / Tutorial Section -->
+    <section class="sony-section light-bg">
+        <div class="section-container">
+            <h2 class="dark-title">Getting Started</h2>
+            <p class="section-desc dark-desc">Explore helpful guides regarding the registration process, user account enrollment, and MFA security setup.</p>
+            
+            <div class="tutorial-grid">
+                <div class="tutorial-card">
+                    <h4>How to Register</h4>
+                    <p>Step-by-step guidance on enrolling new artist profiles into the Ferwap Music database system.</p>
+                </div>
+                <div class="tutorial-card">
+                    <h4>How to Login</h4>
+                    <p>Instructions on accessing your secure analytics dashboard using your verified credentials.</p>
+                </div>
+                <div class="tutorial-card">
+                    <h4>How to Reset Password</h4>
+                    <p>Procedures to securely recover your portal account if you encounter login issues.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Corporate Footer -->
+    <footer class="sony-footer">
+        <div class="footer-content">
+            <p>&copy; 2026 Ferwap Music Entertainment, All Rights Reserved.</p>
+            <div class="footer-links">
+                <a href="#">Support</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms & Conditions</a>
+            </div>
+        </div>
     </footer>
 
-    <!-- Script Firebase Auth -->
+    <!-- Firebase Authentication Script -->
     <script type="module" src="auth.js"></script>
 </body>
 </html>
