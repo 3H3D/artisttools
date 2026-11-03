@@ -1,142 +1,249 @@
-/* Styling Landing Page ala Major Label Portal */
-body.landing-body {
-  background-color: #ffffff;
-  color: #111111;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+/* Styling Utama ala Portal Korporat Musik Global */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: #ffffff;
+    color: #111111;
 }
 
-.landing-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1.5rem 3rem;
-  border-bottom: 1px solid #eaeaea;
-  background-color: #ffffff;
+/* Header Navbar */
+.sony-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 3rem;
+    border-bottom: 1px solid #eaeaea;
+    background-color: #ffffff;
 }
 
-.logo-text {
-  font-size: 1.25rem;
-  letter-spacing: -0.5px;
-  color: #000;
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
-.logo-text strong {
-  color: #e50914; /* Aksen merah khas label */
+.logo-circle {
+    width: 12px;
+    height: 12px;
+    background-color: #e50914;
+    border-radius: 50%;
+    display: inline-block;
 }
 
-.header-subtitle {
-  font-size: 0.85rem;
-  color: #666;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+.logo-title {
+    font-size: 1.2rem;
+    letter-spacing: -0.5px;
+    color: #000;
 }
 
-.landing-main {
-  max-width: 900px;
-  margin: 3rem auto;
-  padding: 0 1.5rem;
-  text-align: center;
+.logo-title strong {
+    color: #e50914;
 }
 
-.hero-text h1 {
-  font-size: 2.5rem;
-  font-weight: 800;
-  letter-spacing: -1px;
-  margin-bottom: 1rem;
-  color: #111;
+.header-tagline {
+    font-size: 0.8rem;
+    color: #666;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
-.hero-text p {
-  font-size: 1.05rem;
-  color: #555;
-  max-width: 650px;
-  margin: 0 auto 2.5rem auto;
-  line-height: 1.6;
+/* Hero Section */
+.sony-hero {
+    padding: 4rem 2rem;
+    text-align: center;
+    background: linear-gradient(180deg, #ffffff 0%, #f9fafb 100%);
+    border-bottom: 1px solid #eaeaea;
 }
 
-/* Card Form Login di Halaman Depan */
-.landing-auth-card {
-  background-color: #f9fafb;
-  border: 1px solid #e5e7eb;
-  padding: 2.5rem;
-  border-radius: 12px;
-  max-width: 450px;
-  margin: 0 auto 3rem auto;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-  text-align: left;
+.hero-content h1 {
+    font-size: 2.8rem;
+    font-weight: 800;
+    letter-spacing: -1px;
+    margin-bottom: 1rem;
+    color: #111;
 }
 
-.landing-auth-card h3 {
-  font-size: 1.2rem;
-  margin-bottom: 1.25rem;
-  color: #111;
-  text-align: center;
+.hero-content p {
+    font-size: 1.1rem;
+    color: #555;
+    max-width: 650px;
+    margin: 0 auto 2.5rem auto;
+    line-height: 1.6;
 }
 
-.landing-auth-card input {
-  width: 100%;
-  padding: 0.85rem 1rem;
-  margin-bottom: 1rem;
-  background-color: #ffffff;
-  border: 1px solid #d1d5db;
-  border-radius: 6px;
-  font-size: 0.95rem;
-  outline: none;
-  box-sizing: border-box;
+/* Kotak Login di Hero Section */
+.sony-login-box {
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
+    padding: 2.5rem;
+    border-radius: 12px;
+    max-width: 400px;
+    margin: 0 auto;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    text-align: left;
 }
 
-.landing-auth-card input:focus {
-  border-color: #e50914;
+.sony-login-box h3 {
+    font-size: 1.25rem;
+    margin-bottom: 1.25rem;
+    color: #111;
+    text-align: center;
 }
 
-.portal-login-btn {
-  background-color: #e50914;
-  color: white;
-  border: none;
-  padding: 0.9rem;
-  border-radius: 6px;
-  font-weight: 600;
-  font-size: 1rem;
-  cursor: pointer;
-  width: 100%;
-  transition: opacity 0.2s;
+.sony-login-box input {
+    width: 100%;
+    padding: 0.85rem 1rem;
+    margin-bottom: 1rem;
+    background-color: #ffffff;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    outline: none;
+    box-sizing: border-box;
 }
 
-.portal-login-btn:hover {
-  opacity: 0.9;
+.sony-login-box input:focus {
+    border-color: #e50914;
 }
 
-/* Bagian Fitur Pendukung di Bawah */
-.features-preview {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1.5rem;
-  margin-top: 3rem;
-  padding-top: 2rem;
-  border-top: 1px solid #eaeaea;
-  text-align: left;
+.sony-btn-primary {
+    background-color: #e50914;
+    color: white;
+    border: none;
+    padding: 0.9rem;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    width: 100%;
+    transition: opacity 0.2s;
 }
 
-.feature-item h4 {
-  font-size: 1rem;
-  margin-bottom: 0.4rem;
-  color: #111;
+.sony-btn-primary:hover {
+    opacity: 0.9;
 }
 
-.feature-item p {
-  font-size: 0.85rem;
-  color: #666;
-  margin: 0;
-  line-height: 1.5;
+/* Seksi Konten (Dark & Light Banner) */
+.sony-section {
+    padding: 5rem 2rem;
+    text-align: center;
 }
 
-.landing-footer {
-  text-align: center;
-  padding: 2rem;
-  font-size: 0.8rem;
-  color: #888;
-  border-top: 1px solid #eaeaea;
-  margin-top: 4rem;
+.dark-bg {
+    background-color: #b91c1c; /* Nuansa merah korporat */
+    color: #ffffff;
+}
+
+.light-bg {
+    background-color: #ffffff;
+    color: #111111;
+}
+
+.section-container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.sony-section h2 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    letter-spacing: -0.5px;
+}
+
+.dark-title {
+    color: #111;
+}
+
+.section-desc {
+    font-size: 1.05rem;
+    color: rgba(255, 255, 255, 0.9);
+    max-width: 600px;
+    margin: 0 auto 3rem auto;
+    line-height: 1.5;
+}
+
+.dark-desc {
+    color: #666;
+}
+
+/* Grid Kartu Fitur & Tutorial */
+.features-grid, .tutorial-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    text-align: left;
+}
+
+.feature-card, .tutorial-card {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 2rem;
+    border-radius: 8px;
+}
+
+.tutorial-card {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+}
+
+.feature-card h4, .tutorial-card h4 {
+    font-size: 1.15rem;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+}
+
+.tutorial-card h4 {
+    color: #111;
+}
+
+.feature-card p, .tutorial-card p {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.5;
+    margin: 0;
+}
+
+.tutorial-card p {
+    color: #666;
+}
+
+/* Footer */
+.sony-footer {
+    background-color: #0f1115;
+    color: #9ca3af;
+    padding: 2.5rem 3rem;
+    border-top: 1px solid #2a2e39;
+}
+
+.footer-content {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+}
+
+.footer-links {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.footer-links a {
+    color: #9ca3af;
+    text-decoration: none;
+}
+
+.footer-links a:hover {
+    color: #fff;
+}
+
+.error-msg {
+    color: #ff4d4d !important;
+    margin-top: 1rem;
+    font-size: 0.85rem;
+    text-align: center;
 }
