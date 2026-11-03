@@ -1,39 +1,7 @@
 {
-  "artist": {
-    "name": "3H3D",
-    "role": "Singer • Song Writer • Music Producer",
-    "label": "Ferwap Music Entertainment",
-    "profileImage": "assets/img/profile.jpg"
-  },
-  "stats": {
-    "totalStreams": "1,245,890",
-    "monthlyListeners": "85,420",
-    "totalEarnings": "$3,420.50"
-  },
-  "releases": [
-    {
-      "title": "Sogdai Ya",
-      "isrc": "QZXYZ2600001",
-      "streams": "450,120",
-      "releaseDate": "2026-03-15"
-    },
-    {
-      "title": "TORU RE",
-      "isrc": "QZXYZ2600002",
-      "streams": "320,050",
-      "releaseDate": "2026-06-10"
-    },
-    {
-      "title": "Og Wesa",
-      "isrc": "QZXYZ2600003",
-      "streams": "275,400",
-      "releaseDate": "2026-08-22"
-    },
-    {
-      "title": "Kwiregtori",
-      "isrc": "QZXYZ2600004",
-      "streams": "200,320",
-      "releaseDate": "2026-10-05"
-    }
-  ]
+    "totalEarnings": "$0.03",
+    "totalDownloads": "0",
+    "totalStreams": "50",
+    "youtubeViews": "767",
+    "lastUpdated": "2026-11-03 18:12:40"
 }
