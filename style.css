@@ -210,7 +210,7 @@ body {
     color: #666;
 }
 
-/* Footer */
+/* Footer Korporat (Diperbarui dengan Logo & Posisi Kanan Atas) */
 .sony-footer {
     background-color: #0f1115;
     color: #9ca3af;
@@ -219,26 +219,65 @@ body {
 }
 
 .footer-content {
-    max-width: 1100px;
+    max-width: 1200px;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
+    align-items: flex-start;
+}
+
+/* Sisi Kiri: Logo Ferwap */
+.footer-logo-area {
+    display: flex;
     align-items: center;
+    gap: 0.75rem;
+}
+
+.footer-logo-img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.footer-brand {
+    font-size: 1.15rem;
+    color: #ffffff;
+    letter-spacing: -0.5px;
+    font-weight: 600;
+}
+
+.footer-brand strong {
+    color: #e50914;
+}
+
+/* Sisi Kanan Atas: Hak Cipta & Tautan */
+.footer-right-area {
+    text-align: right;
+}
+
+.footer-right-area p {
+    margin: 0 0 0.5rem 0;
     font-size: 0.85rem;
+    color: #9ca3af;
 }
 
 .footer-links {
     display: flex;
-    gap: 1.5rem;
+    gap: 1.25rem;
+    justify-content: flex-end;
+    font-size: 0.8rem;
 }
 
 .footer-links a {
     color: #9ca3af;
     text-decoration: none;
+    transition: color 0.2s;
 }
 
 .footer-links a:hover {
-    color: #fff;
+    color: #ffffff;
 }
 
 .error-msg {
