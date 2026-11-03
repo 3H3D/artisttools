@@ -9,13 +9,15 @@ import {
 
 // Konfigurasi Firebase Anda
 const firebaseConfig = {
-    apiKey: "ISI_DENGAN_API_KEY_FIREBASE_ANDA",
-    authDomain: "PROJECT_ID.firebaseapp.com",
-    projectId: "PROJECT_ID",
-    storageBucket: "PROJECT_ID.appspot.com",
-    messagingSenderId: "SENDER_ID",
-    appId: "APP_ID"
+  apiKey: "AIzaSyBeVIIJ3nbCEuUhYPRvb21eofNSi4FlKl0",
+  authDomain: "my-app-8edk2j.firebaseapp.com",
+  projectId: "my-app-8edk2j",
+  storageBucket: "my-app-8edk2j.firebasestorage.app",
+  messagingSenderId: "116161205939",
+  appId: "1:116161205939:web:8cb9de710880d65b3442c6",
+  measurementId: "G-WZFWH40K5Q"
 };
+
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
