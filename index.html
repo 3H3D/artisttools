@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artist Portal - Ferwap Music Entertainment</title>
+    <!-- Menghubungkan file CSS terpisah -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="dashboard-container">
+        <header>
+            <h1>Ferwap Artist Portal</h1>
+            <p>Real-Time Analytics & Catalog Overview (3H3D)</p>
+        </header>
+
+        <!-- Bagian Statistik -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3>Total Streams</h3>
+                <div class="value" id="total-streams">-</div>
+            </div>
+            <div class="stat-card">
+                <h3>Monthly Listeners</h3>
+                <div class="value" id="monthly-listeners">-</div>
+            </div>
+            <div class="stat-card">
+                <h3>Estimated Earnings</h3>
+                <div class="value" id="total-earnings">-</div>
+            </div>
+        </div>
+
+        <!-- Bagian Tabel Katalog Rilis -->
+        <h2 class="section-title">Catalog Performance & ISRC Registry</h2>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Track Title</th>
+                        <th>ISRC Code</th>
+                        <th>Streams</th>
+                        <th>Release Date</th>
+                    </tr>
+                </thead>
+                <tbody id="releases-table-body">
+                    <!-- Data akan dimuat secara otomatis oleh JavaScript -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Menghubungkan file JavaScript terpisah -->
+    <script src="app.js"></script>
+</body>
+</html>
