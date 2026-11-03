@@ -7,14 +7,15 @@ import {
 
 // Konfigurasi Firebase Anda
 const firebaseConfig = {
-    apiKey: "AIzaSy...",
-    authDomain: "my-app-8edk2j.firebaseapp.com",
-    projectId: "my-app-8edk2j",
-    storageBucket: "my-app-8edk2j.firebasestorage.app",
-    messagingSenderId: "116161705939",
-    appId: "1:116161705939:web:8cb9de710880d65b3442c6",
-    measurementId: "G-WZFMH4WK5Q"
+  apiKey: "AIzaSyBeVIIJ3nbCEuUhYPRvb21eofNSi4FlKl0",
+  authDomain: "my-app-8edk2j.firebaseapp.com",
+  projectId: "my-app-8edk2j",
+  storageBucket: "my-app-8edk2j.firebasestorage.app",
+  messagingSenderId: "116161205939",
+  appId: "1:116161205939:web:8cb9de710880d65b3442c6",
+  measurementId: "G-WZFWH40K5Q"
 };
+
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
