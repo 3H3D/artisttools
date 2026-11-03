@@ -8,22 +8,7 @@
 </head>
 <body>
 
-    <!-- 1. TAMPILAN FORM LOGIN (Muncul Pertama Kali) -->
-    <div id="login-screen" class="auth-container">
-        <div class="auth-box">
-            <h2>Ferwap Portal Access</h2>
-            <p>Silakan login untuk mengakses data analitik & katalog.</p>
-            <form id="login-form">
-                <input type="email" id="email" placeholder="Email" required>
-                <input type="password" id="password" placeholder="Password" required>
-                <button type="submit">Login</button>
-            </form>
-            <p id="auth-error" class="error-msg"></p>
-        </div>
-    </div>
-
-    <!-- 2. TAMPILAN DASHBOARD (Tersembunyi Sebelum Login) -->
-    <div id="dashboard-screen" class="dashboard-container" style="display: none;">
+    <div class="dashboard-container">
         <header>
             <div>
                 <h1>Ferwap Artist Portal</h1>
@@ -67,7 +52,7 @@
         </div>
     </div>
 
-    <!-- Firebase SDK (Modular Version) -->
+    <!-- Script untuk proteksi halaman & memuat data -->
     <script type="module" src="app.js"></script>
 </body>
 </html>
