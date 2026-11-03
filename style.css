@@ -1,69 +1,142 @@
-/* Tampilan Form Login */
-.auth-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 80vh;
+/* Styling Landing Page ala Major Label Portal */
+body.landing-body {
+  background-color: #ffffff;
+  color: #111111;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
-.auth-box {
-  background-color: var(--card-bg);
-  border: 1px solid var(--border-color);
-  padding: 2.5rem;
-  border-radius: 8px;
-  width: 100%;
-  max-width: 400px;
-  text-align: center;
-}
-
-.auth-box h2 {
-  margin-bottom: 0.5rem;
-}
-
-.auth-box p {
-  color: var(--text-muted);
-  font-size: 0.9rem;
-  margin-bottom: 1.5rem;
-}
-
-.auth-box input {
-  width: 100%;
-  padding: 0.75rem;
-  margin-bottom: 1rem;
-  background-color: var(--bg-color);
-  border: 1px solid var(--border-color);
-  border-radius: 4px;
-  color: #fff;
-}
-
-.auth-box button, .logout-btn {
-  background-color: var(--accent-color);
-  color: white;
-  border: none;
-  padding: 0.75rem 1.5rem;
-  border-radius: 4px;
-  font-weight: 600;
-  cursor: pointer;
-  width: 100%;
-}
-
-.logout-btn {
-  width: auto;
-  background-color: #333;
-}
-
-.logout-btn:hover {
-  background-color: #444;
-}
-
-header {
+.landing-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 1.5rem 3rem;
+  border-bottom: 1px solid #eaeaea;
+  background-color: #ffffff;
 }
 
-.error-msg {
-  color: #ff4d4d !important;
-  margin-top: 1rem;
+.logo-text {
+  font-size: 1.25rem;
+  letter-spacing: -0.5px;
+  color: #000;
+}
+
+.logo-text strong {
+  color: #e50914; /* Aksen merah khas label */
+}
+
+.header-subtitle {
   font-size: 0.85rem;
+  color: #666;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.landing-main {
+  max-width: 900px;
+  margin: 3rem auto;
+  padding: 0 1.5rem;
+  text-align: center;
+}
+
+.hero-text h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  letter-spacing: -1px;
+  margin-bottom: 1rem;
+  color: #111;
+}
+
+.hero-text p {
+  font-size: 1.05rem;
+  color: #555;
+  max-width: 650px;
+  margin: 0 auto 2.5rem auto;
+  line-height: 1.6;
+}
+
+/* Card Form Login di Halaman Depan */
+.landing-auth-card {
+  background-color: #f9fafb;
+  border: 1px solid #e5e7eb;
+  padding: 2.5rem;
+  border-radius: 12px;
+  max-width: 450px;
+  margin: 0 auto 3rem auto;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  text-align: left;
+}
+
+.landing-auth-card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 1.25rem;
+  color: #111;
+  text-align: center;
+}
+
+.landing-auth-card input {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  margin-bottom: 1rem;
+  background-color: #ffffff;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.landing-auth-card input:focus {
+  border-color: #e50914;
+}
+
+.portal-login-btn {
+  background-color: #e50914;
+  color: white;
+  border: none;
+  padding: 0.9rem;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  width: 100%;
+  transition: opacity 0.2s;
+}
+
+.portal-login-btn:hover {
+  opacity: 0.9;
+}
+
+/* Bagian Fitur Pendukung di Bawah */
+.features-preview {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid #eaeaea;
+  text-align: left;
+}
+
+.feature-item h4 {
+  font-size: 1rem;
+  margin-bottom: 0.4rem;
+  color: #111;
+}
+
+.feature-item p {
+  font-size: 0.85rem;
+  color: #666;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.landing-footer {
+  text-align: center;
+  padding: 2rem;
+  font-size: 0.8rem;
+  color: #888;
+  border-top: 1px solid #eaeaea;
+  margin-top: 4rem;
 }
