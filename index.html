@@ -41,13 +41,20 @@
         </a>
       </nav>
 
-      <!-- KANAN: PROFIL ARTIS DI UJUNG KANAN -->
-      <div class="tc-user-card" style="display: flex; align-items: center; gap: 12px; background: #111; padding: 8px 14px; border-radius: 8px; border: 1px solid #222;">
-        <div id="user-avatar" class="user-avatar" style="background: #333; color: #fff; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: bold;">U</div>
-        <div class="user-meta">
-          <p id="user-display-name" class="artist-name" style="margin: 0; font-size: 13px; font-weight: bold;">Loading...</p>
-          <span class="account-type" style="font-size: 10px; color: #10b981;">Verified Artist</span>
+      <!-- KANAN: PROFIL ARTIS & TOMBOL LOGOUT -->
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <div class="tc-user-card" style="display: flex; align-items: center; gap: 12px; background: #111; padding: 8px 14px; border-radius: 8px; border: 1px solid #222;">
+          <div id="user-avatar" class="user-avatar" style="background: #333; color: #fff; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: bold;">U</div>
+          <div class="user-meta">
+            <p id="user-display-name" class="artist-name" style="margin: 0; font-size: 13px; font-weight: bold;">Loading...</p>
+            <span class="account-type" style="font-size: 10px; color: #10b981;">Verified Artist</span>
+          </div>
         </div>
+        
+        <!-- Tombol Keluar (Logout) -->
+        <button onclick="handleLogout()" style="background: #1f2937; color: #ff5555; border: 1px solid #374151; padding: 10px 14px; border-radius: 8px; cursor: pointer; font-size: 13px; font-weight: bold; display: flex; align-items: center; gap: 6px; transition: 0.2s;" title="Sign Out">
+          <i class="fa-solid fa-right-from-bracket"></i> Logout
+        </button>
       </div>
 
     </header>
