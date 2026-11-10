@@ -112,85 +112,120 @@
               </div>
             </div>
 
-           <!-- SECTION 2: METADATA -->
-            <div class="tc-card" style="background: #111; border: 1px solid #222; padding: 24px; border-radius: 12px; margin-bottom: 24px;">
-              <div class="card-header-tc" style="display: flex; gap: 16px; margin-bottom: 20px;">
-                <span class="step-num" style="background: #ff2a2a; color: #fff; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; flex-shrink: 0;">02</span>
-                <div>
-                  <h3 style="margin: 0 0 4px 0; font-size: 16px;">Release Metadata</h3>
-                  <p style="margin: 0; color: #a0a0a0; font-size: 13px;">Enter your official track details and copyright ownership.</p>
-                </div>
-              </div>
+            <!-- SECTION 2: METADATA -->
+<div class="tc-card" style="background: #111; border: 1px solid #222; padding: 24px; border-radius: 12px; margin-bottom: 24px;">
+  <div class="card-header-tc" style="display: flex; gap: 16px; margin-bottom: 20px;">
+    <span class="step-num" style="background: #ff2a2a; color: #fff; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; flex-shrink: 0;">02</span>
+    <div>
+      <h3 style="margin: 0 0 4px 0; font-size: 16px;">Release Metadata & Credits</h3>
+      <p style="margin: 0; color: #a0a0a0; font-size: 13px;">Enter official track details, songwriters, producers, and copyright ownership.</p>
+    </div>
+  </div>
 
-              <div class="form-grid" style="display: flex; flex-direction: column; gap: 16px;">
-                
-                <!-- Release Title -->
-                <div class="input-block">
-                  <label style="display: block; font-size: 12px; color: #a0a0a0; margin-bottom: 6px;">Release Title</label>
-                  <input type="text" id="title-input" placeholder="Enter release title" required style="width: 100%; padding: 12px; background: #07090f; border: 1px solid #222; color: #fff; border-radius: 6px; box-sizing: border-box;">
-                </div>
+  <div class="form-grid" style="display: flex; flex-direction: column; gap: 20px;">
+    
+      <!-- Release Title -->
+      <div class="input-block">
+        <label style="display: block; font-size: 12px; color: #a0a0a0; margin-bottom: 6px;">Release Title</label>
+        <input type="text" id="title-input" placeholder="Enter release title" required style="width: 100%; padding: 12px; background: #07090f; border: 1px solid #222; color: #fff; border-radius: 6px; box-sizing: border-box;">
+      </div>
 
-                <!-- Artist Name -->
-                <div class="input-block">
-                  <label style="display: block; font-size: 12px; color: #a0a0a0; margin-bottom: 6px;">Artist Name</label>
-                  <input type="text" id="artist-input" placeholder="e.g. 3H3D" required style="width: 100%; padding: 12px; background: #07090f; border: 1px solid #222; color: #fff; border-radius: 6px; box-sizing: border-box;">
-                </div>
+      <!-- Primary Artist Name & Featuring Artists -->
+      <div class="input-block">
+        <label style="display: block; font-size: 12px; color: #a0a0a0; margin-bottom: 6px;">Primary Artist Name</label>
+        <input type="text" id="artist-input" placeholder="e.g. 3H3D" required style="width: 100%; padding: 12px; background: #07090f; border: 1px solid #222; color: #fff; border-radius: 6px; box-sizing: border-box; margin-bottom: 12px;">
 
-                <!-- Role & Genre -->
-                <div class="row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
-                  <div class="col form-group" style="margin: 0;">
-                    <label for="role" style="display: block; font-size: 12px; color: #a0a0a0; margin-bottom: 6px;">Primary Role</label>
-                    <select id="role" name="role" required style="width: 100%; padding: 12px; background: #07090f; border: 1px solid #222; color: #fff; border-radius: 6px; box-sizing: border-box;">
-                      <option value="">-- Select Your Role --</option>
-                      <option value="solo_singer">Solo Vocalist / Singer</option>
-                      <option value="songwriter">Songwriter</option>
-                      <option value="producer">Music Producer</option>
-                      <option value="band_group">Band / Group</option>
-                    </select>
-                  </div>
+        <!-- Bagian Tambah Featuring Dinamis di Bawah Nama Artis Utama -->
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+          <label style="font-size: 11px; color: #10b981; font-weight: bold;">
+            <i class="fa-solid fa-user-plus"></i> Featuring Artists (Opsional / Kolaborasi)
+          </label>
+          <button type="button" onclick="addFeaturingField()" style="background: #1f2937; color: #10b981; border: 1px solid #374151; padding: 4px 10px; border-radius: 4px; cursor: pointer; font-size: 11px; display: flex; align-items: center; gap: 4px;">
+            <i class="fa-solid fa-plus"></i> Add Featuring
+          </button>
+        </div>
 
-                  <div class="col form-group" style="margin: 0;">
-                    <label for="genre" style="display: block; font-size: 12px; color: #a0a0a0; margin-bottom: 6px;">Primary Genre</label>
-                    <select id="genre" name="genre" required style="width: 100%; padding: 12px; background: #07090f; border: 1px solid #222; color: #fff; border-radius: 6px; box-sizing: border-box;">
-                      <option value="">-- Select Genre --</option>
-                      <option value="Electronic">Electronic / Dance</option>
-                      <option value="Hip-Hop">Hip-Hop / Rap</option>
-                      <option value="Pop">Pop</option>
-                      <option value="Rock">Rock</option>
-                      <option value="R&B">R&B / Soul</option>
-                      <option value="Alternative">Alternative</option>
-                    </select>
-                  </div>
-                </div>
+        <div id="featuring-container" style="display: flex; flex-direction: column; gap: 8px;">
+          <!-- Wadah baris featuring tambahan akan muncul di sini secara dinamis -->
+        </div>
+      </div>
 
-                <!-- Composer & Producer (Nama Resmi Pencipta) -->
-                <div class="row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
-                  <div class="col form-group" style="margin: 0;">
-                    <label style="display: block; font-size: 12px; color: #a0a0a0; margin-bottom: 6px;">Composer / Songwriter (Nama Resmi)</label>
-                    <input type="text" id="composer-input" placeholder="e.g. Abed N. Totouw" required style="width: 100%; padding: 12px; background: #07090f; border: 1px solid #222; color: #fff; border-radius: 6px; box-sizing: border-box;">
-                  </div>
+      <!-- Role & Genre -->
+      <div class="row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+        <div class="col form-group" style="margin: 0;">
+          <label for="role" style="display: block; font-size: 12px; color: #a0a0a0; margin-bottom: 6px;">Primary Role</label>
+          <select id="role" name="role" required style="width: 100%; padding: 12px; background: #07090f; border: 1px solid #222; color: #fff; border-radius: 6px; box-sizing: border-box;">
+            <option value="">-- Select Your Role --</option>
+            <option value="solo_singer">Solo Vocalist / Singer</option>
+            <option value="songwriter">Songwriter</option>
+            <option value="producer">Music Producer</option>
+            <option value="band_group">Band / Group</option>
+          </select>
+        </div>
 
-                  <div class="col form-group" style="margin: 0;">
-                    <label style="display: block; font-size: 12px; color: #a0a0a0; margin-bottom: 6px;">Music Producer</label>
-                    <input type="text" id="producer-input" placeholder="e.g. 3H3D" required style="width: 100%; padding: 12px; background: #07090f; border: 1px solid #222; color: #fff; border-radius: 6px; box-sizing: border-box;">
-                  </div>
-                </div>
+        <div class="col form-group" style="margin: 0;">
+          <label for="genre" style="display: block; font-size: 12px; color: #a0a0a0; margin-bottom: 6px;">Primary Genre</label>
+          <select id="genre" name="genre" required style="width: 100%; padding: 12px; background: #07090f; border: 1px solid #222; color: #fff; border-radius: 6px; box-sizing: border-box;">
+            <option value="">-- Select Genre --</option>
+            <option value="Electronic">Electronic / Dance</option>
+            <option value="Hip-Hop">Hip-Hop / Rap</option>
+            <option value="Pop">Pop</option>
+            <option value="Rock">Rock</option>
+            <option value="R&B">R&B / Soul</option>
+            <option value="Alternative">Alternative</option>
+          </select>
+        </div>
+      </div>
 
-                <!-- Label / P-Line & C-Line (Hak Cipta) -->
-                <div class="row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
-                  <div class="col form-group" style="margin: 0;">
-                    <label style="display: block; font-size: 12px; color: #a0a0a0; margin-bottom: 6px;">P-Line (Sound Recording Copyright)</label>
-                    <input type="text" id="pline-input" value="2026 Ferwap Music Entertainment" required style="width: 100%; padding: 12px; background: #07090f; border: 1px solid #222; color: #fff; border-radius: 6px; box-sizing: border-box;">
-                  </div>
+      <hr style="border: 0; border-top: 1px solid #222; margin: 5px 0;">
 
-                  <div class="col form-group" style="margin: 0;">
-                    <label style="display: block; font-size: 12px; color: #a0a0a0; margin-bottom: 6px;">C-Line (Composition Copyright)</label>
-                    <input type="text" id="cline-input" value="2026 Ferwap Music Entertainment" required style="width: 100%; padding: 12px; background: #07090f; border: 1px solid #222; color: #fff; border-radius: 6px; box-sizing: border-box;">
-                  </div>
-                </div>
+      <!-- BAGIAN KREDIT KONTRIBUTOR (PILIHAN PERAN DI KIRI, NAMA MEMANJANG KE KANAN) -->
+      <div>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+          <div>
+            <label style="font-size: 13px; color: #fff; font-weight: bold;">Songwriters & Producers Credits</label>
+            <p style="margin: 2px 0 0 0; font-size: 11px; color: #a0a0a0;">Add all composers, lyricists, and producers involved in this track.</p>
+          </div>
+          <button type="button" onclick="addCreditField()" style="background: #1f2937; color: #10b981; border: 1px solid #374151; padding: 8px 14px; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: bold; display: flex; align-items: center; gap: 6px;">
+            <i class="fa-solid fa-plus"></i> Add Person
+          </button>
+        </div>
 
-              </div>
-            </div>
+        <!-- Wadah baris kredit dinamis -->
+        <div id="credits-container" style="display: flex; flex-direction: column; gap: 10px;">
+          <!-- Baris Default Utama (Grid 180px untuk pilihan di kiri, 1fr untuk input di kanan) -->
+          <div class="credit-row" style="display: grid; grid-template-columns: 180px 1fr auto; gap: 10px; align-items: center;">
+            <select class="credit-role" style="padding: 12px; background: #07090f; border: 1px solid #222; color: #fff; border-radius: 6px; font-size: 12px;">
+              <option value="Composer">Composer (Pencipta)</option>
+              <option value="Lyricist">Lyricist (Lirik)</option>
+              <option value="Producer">Music Producer</option>
+              <option value="Co-Producer">Co-Producer</option>
+            </select>
+            <input type="text" class="credit-name" placeholder="Enter legal full name" required style="width: 100%; padding: 12px; background: #07090f; border: 1px solid #222; color: #fff; border-radius: 6px; font-size: 12px; box-sizing: border-box;">
+            <button type="button" onclick="this.parentElement.remove()" style="background: #1a1111; color: #ff5555; border: 1px solid #332222; padding: 12px 14px; border-radius: 6px; cursor: pointer;" title="Remove">
+              <i class="fa-solid fa-trash"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <hr style="border: 0; border-top: 1px solid #222; margin: 5px 0;">
+
+      <!-- Label / P-Line & C-Line (Hak Cipta) -->
+      <div class="row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+        <div class="col form-group" style="margin: 0;">
+          <label style="display: block; font-size: 12px; color: #a0a0a0; margin-bottom: 6px;">P-Line (Sound Recording Copyright)</label>
+          <input type="text" id="pline-input" value="2026 Ferwap Music Entertainment" required style="width: 100%; padding: 12px; background: #07090f; border: 1px solid #222; color: #fff; border-radius: 6px; box-sizing: border-box;">
+        </div>
+
+        <div class="col form-group" style="margin: 0;">
+          <label style="display: block; font-size: 12px; color: #a0a0a0; margin-bottom: 6px;">C-Line (Composition Copyright)</label>
+          <input type="text" id="cline-input" value="2026 Ferwap Music Entertainment" required style="width: 100%; padding: 12px; background: #07090f; border: 1px solid #222; color: #fff; border-radius: 6px; box-sizing: border-box;">
+        </div>
+      </div>
+
+  </div>
+</div>
             <!-- SUBMIT ACTION -->
             <div class="form-footer-action">
               <button type="submit" class="tc-btn-submit" style="background: #ff2a2a; color: #fff; border: none; padding: 14px 24px; border-radius: 8px; font-weight: bold; cursor: pointer; width: 100%; display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 15px;">
