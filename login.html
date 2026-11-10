@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artist Portal Login — Ferwap Music</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #000;
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* HEADER RED BANNER */
+        .header-banner {
+            background: #ff2a2a;
+            padding: 16px 30px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-logo {
+            background: #000;
+            color: #fff;
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 14px;
+        }
+
+        .brand-text h4 { font-size: 14px; font-weight: 800; letter-spacing: 0.5px; }
+        .brand-text span { font-size: 10px; opacity: 0.8; display: block; }
+
+        /* MAIN CONTENT */
+        .login-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            max-width: 440px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .login-header { text-align: center; margin-bottom: 32px; }
+        .login-header h1 { font-size: 28px; font-weight: 800; margin-bottom: 8px; }
+        .login-header p { color: #888; font-size: 13.5px; line-height: 1.5; }
+
+        .form-group { width: 100%; margin-bottom: 20px; text-align: left; }
+        .form-group label { display: block; font-size: 11px; text-transform: uppercase; color: #888; margin-bottom: 8px; font-weight: 700; letter-spacing: 0.5px; }
+        
+        .input-box {
+            width: 100%;
+            background: #0b0f19;
+            border: 1px solid #1f2937;
+            padding: 14px 16px;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .input-box:focus { border-color: #ff2a2a; }
+
+        .btn-submit {
+            width: 100%;
+            background: #ff2a2a;
+            color: #fff;
+            font-weight: 700;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 10px;
+            transition: background 0.2s;
+        }
+        .btn-submit:hover { background: #e02424; }
+
+        .status-msg { margin-top: 16px; font-size: 13px; text-align: center; }
+
+        /* FOOTER RED BANNER */
+        .footer-banner {
+            background: #ff2a2a;
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .footer-banner a { color: #fff; text-decoration: none; }
+        .footer-banner a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+
+    <!-- TOP HEADER -->
+    <header class="header-banner">
+        <div class="brand-logo">3H</div>
+        <div class="brand-text">
+            <h4>FERWAP MUSIC</h4>
+            <span>Ferwap Group</span>
+        </div>
+    </header>
+
+    <!-- LOGIN FORM -->
+    <main class="login-container">
+        <div class="login-header">
+            <h1>Artist Portal Login</h1>
+            <p>Access your global distribution workspace, manage releases, and view analytics.</p>
+        </div>
+
+        <form style="width: 100%;" onsubmit="handleArtistLogin(event)">
+            <div class="form-group">
+                <label>Artist Email Address</label>
+                <input type="email" id="artist-email" class="input-box" placeholder="artist@domain.com" required>
+            </div>
+
+            <div class="form-group">
+                <label>Access Password</label>
+                <input type="password" id="artist-password" class="input-box" placeholder="••••••••••••" required>
+            </div>
+
+            <button type="submit" class="btn-submit">Sign In to Workspace</button>
+            <p id="auth-status" class="status-msg"></p>
+        </form>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer-banner">
+        <div>© 2026 Ferwap Music Entertainment. All Rights Reserved.</div>
+        <div style="display: flex; gap: 12px;">
+            <a href="#">Privacy Policy</a>
+            <span>|</span>
+            <a href="#">Terms of Use</a>
+            <span>|</span>
+            <a href="#">Support</a>
+        </div>
+    </footer>
+
+    <script>
+        const SUPABASE_URL = 'https://donsspcslvpzuphptmft.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRvbnNzcGNzbHZwenVwaHB0bWZ0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQyNDMyMTMsImV4cCI6MjEwOTgxOTIxM30.P_V9vLXaUdoxY5EGMMQYrL4Ecjze_By6PI-hDj7jyH8';
+        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        async function handleArtistLogin(e) {
+            e.preventDefault();
+            const email = document.getElementById('artist-email').value;
+            const password = document.getElementById('artist-password').value;
+            const statusEl = document.getElementById('auth-status');
+
+            statusEl.style.color = '#ccc';
+            statusEl.textContent = 'Authenticating...';
+
+            const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
+
+            if (error) {
+                statusEl.style.color = '#ff5555';
+                statusEl.textContent = 'Login Failed: ' + error.message;
+            } else {
+                statusEl.style.color = '#00ff66';
+                statusEl.textContent = 'Success! Redirecting to distribution portal...';
+                
+                // Redirect langsung ke dasbor agregator artis
+                setTimeout(() => {
+                    window.location.href = 'distribution.html'; // Sesuaikan nama file dasbor agregator kamu
+                }, 1200);
+            }
+        }
+    </script>
+</body>
+</html>
