@@ -170,12 +170,17 @@ function handleCoverSelect(input) {
   }
 }
 
-// Event Listener Submit: Upload File ke Storage + Simpan Metadata Bersih ke Database
+// Event Listener Submit: Upload File ke Storage + Simpan Metadata Lengkap ke Database
 document.getElementById('artist-release-form').addEventListener('submit', async function(e) {
   e.preventDefault();
 
   const releaseTitle = document.getElementById('title-input').value;
   const displayArtist = document.getElementById('artist-input').value;
+  const trackGenre = document.getElementById('genre').value;
+  const composerName = document.getElementById('composer-input').value;
+  const producerName = document.getElementById('producer-input').value;
+  const pLine = document.getElementById('pline-input').value;
+  const cLine = document.getElementById('cline-input').value;
   
   const audioFile = document.getElementById('audio-input').files[0];
   const coverFile = document.getElementById('cover-input').files[0];
@@ -232,14 +237,19 @@ document.getElementById('artist-release-form').addEventListener('submit', async 
     coverUrl = coverData.path;
   }
 
-  // 3. Simpan ke Database (UPC & ISRC dibiarkan kosong/pending untuk disinkronkan B2B nantinya)
+  // 3. Simpan ke Database dengan Metadata Lengkap (Composer, Producer, P-Line, C-Line, Genre)
   const { error: dbError } = await supabaseClient
     .from('releases')
     .insert([
       { 
         user_id: session.user.id, 
         title: releaseTitle, 
-        artist: displayArtist, 
+        artist: displayArtist,
+        genre: trackGenre,
+        composer: composerName,
+        producer: producerName,
+        pline: pLine,
+        cline: cLine,
         upc: null, 
         isrc: null,
         audio_url: audioUrl,
