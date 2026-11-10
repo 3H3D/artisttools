@@ -170,23 +170,107 @@ function handleCoverSelect(input) {
   }
 }
 
+// ----------------------------------------------------
+// FUNGSI DINAMIS: TAMBAH ARTIS & KREDIT KONTRIBUTOR
+// ----------------------------------------------------
+
+// Fungsi untuk menambah baris artis (Primary / Featuring / Remixer) secara horizontal
+function addArtistField() {
+  const container = document.getElementById('artists-container');
+  
+  const wrapper = document.createElement('div');
+  wrapper.className = 'artist-row';
+  wrapper.style.cssText = 'display: grid; grid-template-columns: 180px 1fr auto; gap: 10px; align-items: center;';
+
+  wrapper.innerHTML = `
+    <select class="artist-role" style="padding: 12px; background: #07090f; border: 1px solid #222; color: #fff; border-radius: 6px; font-size: 12px;">
+      <option value="Featuring">Featured Artist (Ft.)</option>
+      <option value="Primary Artist">Primary Artist</option>
+      <option value="Remixer">Remixer</option>
+    </select>
+    <input type="text" class="artist-name-input" placeholder="Enter artist name (e.g. ANDER)" required style="width: 100%; padding: 12px; background: #07090f; border: 1px solid #222; color: #fff; border-radius: 6px; font-size: 12px; box-sizing: border-box;">
+    <button type="button" onclick="this.parentElement.remove()" style="background: #1a1111; color: #ff5555; border: 1px solid #332222; padding: 12px 14px; border-radius: 6px; cursor: pointer;" title="Remove">
+      <i class="fa-solid fa-trash"></i>
+    </button>
+  `;
+
+  container.appendChild(wrapper);
+}
+
+// Fungsi untuk menambah baris kredit secara horizontal (Pilihan di kiri, nama di kanan)
+function addCreditField() {
+  const container = document.getElementById('credits-container');
+  
+  const wrapper = document.createElement('div');
+  wrapper.className = 'credit-row';
+  wrapper.style.cssText = 'display: grid; grid-template-columns: 180px 1fr auto; gap: 10px; align-items: center;';
+
+  wrapper.innerHTML = `
+    <select class="credit-role" style="padding: 12px; background: #07090f; border: 1px solid #222; color: #fff; border-radius: 6px; font-size: 12px;">
+      <option value="Composer">Composer (Pencipta)</option>
+      <option value="Lyricist">Lyricist (Lirik)</option>
+      <option value="Producer">Music Producer</option>
+      <option value="Co-Producer">Co-Producer</option>
+    </select>
+    <input type="text" class="credit-name" placeholder="Enter legal full name" required style="width: 100%; padding: 12px; background: #07090f; border: 1px solid #222; color: #fff; border-radius: 6px; font-size: 12px; box-sizing: border-box;">
+    <button type="button" onclick="this.parentElement.remove()" style="background: #1a1111; color: #ff5555; border: 1px solid #332222; padding: 12px 14px; border-radius: 6px; cursor: pointer;" title="Remove">
+      <i class="fa-solid fa-trash"></i>
+    </button>
+  `;
+
+  container.appendChild(wrapper);
+}
+
 // Event Listener Submit: Upload File ke Storage + Simpan Metadata Lengkap ke Database
 document.getElementById('artist-release-form').addEventListener('submit', async function(e) {
   e.preventDefault();
 
   const releaseTitle = document.getElementById('title-input').value;
-  const displayArtist = document.getElementById('artist-input').value;
   const trackGenre = document.getElementById('genre').value;
-  const composerName = document.getElementById('composer-input').value;
-  const producerName = document.getElementById('producer-input').value;
   const pLine = document.getElementById('pline-input').value;
   const cLine = document.getElementById('cline-input').value;
   
+  // Mengambil data dari baris-baris artis dinamis (Primary Artist & Featuring/Remixer)
+  const artistRows = document.querySelectorAll('.artist-row');
+  let primaryArtist = "";
+  let allArtistsSummary = [];
+  
+  artistRows.forEach(row => {
+    const roleSelect = row.querySelector('.artist-role').value;
+    const nameInput = row.querySelector('input').value.trim();
+    if (nameInput) {
+      if (roleSelect === 'Primary Artist' && !primaryArtist) {
+        primaryArtist = nameInput;
+      }
+      allArtistsSummary.push(`${roleSelect}: ${nameInput}`);
+    }
+  });
+
+  if (!primaryArtist) {
+    primaryArtist = document.getElementById('artist-input').value.trim();
+  }
+
+  // Mengambil data dari baris-baris kredit kontributor dinamis (Composer, Producer, dll)
+  const creditRows = document.querySelectorAll('.credit-row');
+  let creditsList = [];
+  let primaryComposer = "";
+  let primaryProducer = "";
+
+  creditRows.forEach(row => {
+    const role = row.querySelector('.credit-role').value;
+    const name = row.querySelector('.credit-name').value.trim();
+    if (name) {
+      creditsList.push({ role, name });
+      if ((role === 'Composer') && !primaryComposer) primaryComposer = name;
+      if ((role === 'Producer' || role === 'Co-Producer') && !primaryProducer) primaryProducer = name;
+    }
+  });
+
   const audioFile = document.getElementById('audio-input').files[0];
   const coverFile = document.getElementById('cover-input').files[0];
 
-  if (!releaseTitle || !displayArtist) {
-    alert("Mohon isi Judul Lagu dan Nama Artis terlebih dahulu!");
+  if (!releaseTitle || !primaryArtist) {
+    alert("Mohon isi Judul Lagu dan Nama Artis Utama terlebih dahulu!");
     return;
   }
 
@@ -237,17 +321,17 @@ document.getElementById('artist-release-form').addEventListener('submit', async 
     coverUrl = coverData.path;
   }
 
-  // 3. Simpan ke Database dengan Metadata Lengkap (Composer, Producer, P-Line, C-Line, Genre)
+  // 3. Simpan ke Database dengan Metadata Lengkap & Data Kontributor Dinamis
   const { error: dbError } = await supabaseClient
     .from('releases')
     .insert([
       { 
         user_id: session.user.id, 
         title: releaseTitle, 
-        artist: displayArtist,
+        artist: primaryArtist,
         genre: trackGenre,
-        composer: composerName,
-        producer: producerName,
+        composer: primaryComposer || (creditsList.length > 0 ? creditsList[0].name : primaryArtist),
+        producer: primaryProducer || '-',
         pline: pLine,
         cline: cLine,
         upc: null, 
