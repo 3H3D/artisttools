@@ -10,7 +10,6 @@ async function checkAuth() {
   if (!session) {
     window.location.href = 'login.html';
   } else {
-    // Tarik nama artis dari database secara otomatis
     updateUserInfo(session);
   }
 }
@@ -20,7 +19,6 @@ checkAuth();
 async function updateUserInfo(session) {
   const userId = session.user.id;
 
-  // Mengambil nama artis dari tabel 'profiles'
   const { data, error } = await supabaseClient
     .from('profiles')
     .select('artist_name')
@@ -32,7 +30,6 @@ async function updateUserInfo(session) {
   if (!error && data && data.artist_name) {
     artistName = data.artist_name.toUpperCase();
   } else {
-    // Cadangan jika belum terdaftar di tabel profiles, ambil dari depan email
     const userEmail = session.user.email || "Artist";
     artistName = userEmail.split('@')[0].toUpperCase();
   }
@@ -67,7 +64,7 @@ function navigateTo(sectionId, clickedElement) {
   }
 }
 
-// Ambil Data Katalog Rilis (Khusus Tampilan Artis - Tanpa Tombol Delete)
+// Ambil Data Katalog Rilis (Khusus Tampilan Artis)
 async function loadCatalogData() {
   const catalogContainer = document.getElementById('catalog-list');
   if (!catalogContainer) return;
@@ -103,8 +100,8 @@ async function loadCatalogData() {
           <span style="font-size:12px; color:#a0a0a0;">Artist: ${rel.artist || '-'}</span>
         </div>
         <div style="text-align:right; font-size:12px; color:#888;">
-          <div>UPC: ${rel.upc || '-'}</div>
-          <div>ISRC: ${rel.isrc || '-'}</div>
+          <div>UPC: ${rel.upc || 'Pending (B2B Sync)'}</div>
+          <div>ISRC: ${rel.isrc || 'Pending (B2B Sync)'}</div>
         </div>
       </div>
     `;
@@ -112,17 +109,6 @@ async function loadCatalogData() {
   html += '</div>';
 
   catalogContainer.innerHTML = html;
-}
-
-// Generator Kode Otomatis
-function generateAutoUPC() {
-  const randomSuffix = Math.floor(10000000000 + Math.random() * 90000000000);
-  return `83${randomSuffix}`;
-}
-
-function generateAutoISRC() {
-  const random5Digits = Math.floor(10000 + Math.random() * 90000);
-  return `ID-FRW-26-${random5Digits}`;
 }
 
 function handleAudioSelect(input) {
@@ -139,12 +125,13 @@ function handleCoverSelect(input) {
   }
 }
 
-// Event Listener Submit: Upload File ke Storage + Simpan Metadata ke Database
+// Event Listener Submit: Upload File ke Storage + Simpan Metadata Bersih ke Database
 document.getElementById('artist-release-form').addEventListener('submit', async function(e) {
   e.preventDefault();
 
   const releaseTitle = document.getElementById('title-input').value;
   const displayArtist = document.getElementById('artist-input').value;
+  
   const audioFile = document.getElementById('audio-input').files[0];
   const coverFile = document.getElementById('cover-input').files[0];
 
@@ -168,7 +155,7 @@ document.getElementById('artist-release-form').addEventListener('submit', async 
   let audioUrl = '';
   let coverUrl = '';
 
-  // 1. Upload File Audio ke Supabase Storage (Bucket: Release Official)
+  // 1. Upload File Audio ke Supabase Storage
   if (audioFile) {
     const audioFileName = `${session.user.id}/${Date.now()}_${audioFile.name}`;
     const { data: audioData, error: audioError } = await supabaseClient.storage
@@ -184,7 +171,7 @@ document.getElementById('artist-release-form').addEventListener('submit', async 
     audioUrl = audioData.path;
   }
 
-  // 2. Upload Cover Art ke Supabase Storage (Bucket: Release Official)
+  // 2. Upload Cover Art ke Supabase Storage
   if (coverFile) {
     const coverFileName = `${session.user.id}/${Date.now()}_${coverFile.name}`;
     const { data: coverData, error: coverError } = await supabaseClient.storage
@@ -200,11 +187,7 @@ document.getElementById('artist-release-form').addEventListener('submit', async 
     coverUrl = coverData.path;
   }
 
-  // 3. Generate Kode UPC & ISRC Otomatis
-  const autoUpc = generateAutoUPC();
-  const autoIsrc = generateAutoISRC();
-
-  // 4. Simpan ke Database Tabel releases
+  // 3. Simpan ke Database (UPC & ISRC dibiarkan kosong/pending untuk disinkronkan B2B nantinya)
   const { error: dbError } = await supabaseClient
     .from('releases')
     .insert([
@@ -212,8 +195,8 @@ document.getElementById('artist-release-form').addEventListener('submit', async 
         user_id: session.user.id, 
         title: releaseTitle, 
         artist: displayArtist, 
-        upc: autoUpc, 
-        isrc: autoIsrc,
+        upc: null, 
+        isrc: null,
         audio_url: audioUrl,
         cover_url: coverUrl
       }
@@ -225,7 +208,7 @@ document.getElementById('artist-release-form').addEventListener('submit', async 
   if (dbError) {
     alert("Gagal menyimpan ke database: " + dbError.message);
   } else {
-    alert(`Berhasil! Rilis "${releaseTitle}" berhasil diunggah.\nUPC: ${autoUpc}\nISRC: ${autoIsrc}`);
+    alert(`Berhasil! Rilis "${releaseTitle}" berhasil dikirim ke server. Menunggu sinkronisasi kode dari sistem B2B.`);
     this.reset();
     
     document.getElementById('audio-status-text').innerText = "Click or drop audio file here";
