@@ -161,14 +161,8 @@
         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRvbnNzcGNzbHZwenVwaHB0bWZ0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQyNDMyMTMsImV4cCI6MjEwOTgxOTIxM30.P_V9vLXaUdoxY5EGMMQYrL4Ecjze_By6PI-hDj7jyH8';
         const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-        // Jika user ternyata sudah punya sesi aktif saat membuka login.html, langsung lempar ke index.html
-        async function checkExistingSession() {
-            const { data: { session } } = await supabaseClient.auth.getSession();
-            if (session) {
-                window.location.replace('index.html');
-            }
-        }
-        checkExistingSession();
+        // Hapus pengecekan otomatis di halaman login agar tidak terjadi bentrok/looping saat baru keluar (logout)
+        // Biarkan halaman login murni menjadi tempat input manual.
 
         async function handleArtistLogin(e) {
             e.preventDefault();
@@ -188,7 +182,7 @@
                 statusEl.style.color = '#00ff66';
                 statusEl.textContent = 'Success! Redirecting to distribution portal...';
                 
-                // Menggunakan window.location.replace agar riwayat halaman bersih dan tidak looping
+                // Gunakan replace agar masuk bersih ke index.html
                 setTimeout(() => {
                     window.location.replace('index.html'); 
                 }, 1000);
