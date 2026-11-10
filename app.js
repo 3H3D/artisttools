@@ -8,7 +8,7 @@ const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_
 async function checkAuth() {
   const { data: { session } } = await supabaseClient.auth.getSession();
   if (!session) {
-    window.location.href = 'login.html';
+    window.location.href = 'index.html';
   } else {
     updateUserInfo(session);
   }
@@ -42,6 +42,42 @@ async function updateUserInfo(session) {
   if (nameElement) nameElement.innerText = artistName;
   if (avatarElement) avatarElement.innerText = artistInitial;
 }
+
+// ----------------------------------------------------
+// FITUR KELUAR (LOGOUT) & KEAMANAN SESI OTOMATIS
+// ----------------------------------------------------
+
+// Fungsi Tombol Logout Manual
+async function handleLogout() {
+  const { error } = await supabaseClient.auth.signOut();
+  if (error) {
+    alert("Gagal keluar: " + error.message);
+  } else {
+    window.location.href = 'index.html';
+  }
+}
+
+// Auto-Logout jika tidak ada aktivitas selama 15 menit
+let inactivityTimer;
+const inactivityLimit = 15 * 60 * 1000; 
+
+async function triggerAutoLogout() {
+  await supabaseClient.auth.signOut();
+  alert("Sesi Anda telah kedaluwarsa karena tidak ada aktivitas. Silakan login kembali.");
+  window.location.href = 'index.html';
+}
+
+function resetInactivityTimer() {
+  clearTimeout(inactivityTimer);
+  inactivityTimer = setTimeout(triggerAutoLogout, inactivityLimit);
+}
+
+window.onload = resetInactivityTimer;
+window.onmousemove = resetInactivityTimer;
+window.onkeypress = resetInactivityTimer;
+window.onclick = resetInactivityTimer;
+window.onscroll = resetInactivityTimer;
+
 
 // Navigasi Menu
 function navigateTo(sectionId, clickedElement) {
@@ -148,7 +184,7 @@ document.getElementById('artist-release-form').addEventListener('submit', async 
   const { data: { session }, error: sessionError } = await supabaseClient.auth.getSession();
   if (sessionError || !session) {
     alert("Sesi login kedaluwarsa. Silakan sign in ulang.");
-    window.location.href = 'login.html';
+    window.location.href = 'index.html';
     return;
   }
 
