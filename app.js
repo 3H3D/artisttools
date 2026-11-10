@@ -4,13 +4,18 @@ const SUPABASE_PUBLISHABLE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiO
 // Inisialisasi Klien Supabase
 const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
 
-// Pengecekan Sesi Login Artis & Ambil Data Profil Otomatis
+// Pengecekan Sesi Login Artis (Aman dari Looping / Berkedip)
 async function checkAuth() {
-  const { data: { session } } = await supabaseClient.auth.getSession();
-  if (!session) {
+  try {
+    const { data: { session }, error } = await supabaseClient.auth.getSession();
+    if (error || !session) {
+      // Jika tidak ada sesi, langsung pindah bersih ke login.html tanpa jeda kedip
+      window.location.replace('login.html');
+    } else {
+      updateUserInfo(session);
+    }
+  } catch (err) {
     window.location.replace('login.html');
-  } else {
-    updateUserInfo(session);
   }
 }
 checkAuth();
@@ -47,15 +52,14 @@ async function updateUserInfo(session) {
 // FITUR KELUAR (LOGOUT) & KEAMANAN SESI OTOMATIS
 // ----------------------------------------------------
 
-// Fungsi Tombol Logout Manual
+// Fungsi Tombol Logout Manual (Menggunakan replace agar bersih dan tidak looping)
 async function handleLogout() {
-  const { error } = await supabaseClient.auth.signOut();
-  if (error) {
-    alert("Gagal keluar: " + error.message);
-  } else {
-    // Menggunakan replace agar riwayat halaman diganti bersih ke halaman login
-    window.location.replace('login.html');
+  try {
+    await supabaseClient.auth.signOut();
+  } catch (e) {
+    console.error(e);
   }
+  window.location.replace('login.html');
 }
 
 // Auto-Logout jika tidak ada aktivitas selama 15 menit
@@ -63,7 +67,11 @@ let inactivityTimer;
 const inactivityLimit = 15 * 60 * 1000; 
 
 async function triggerAutoLogout() {
-  await supabaseClient.auth.signOut();
+  try {
+    await supabaseClient.auth.signOut();
+  } catch (e) {
+    console.error(e);
+  }
   alert("Sesi Anda telah kedaluwarsa karena tidak ada aktivitas. Silakan login kembali.");
   window.location.replace('login.html');
 }
