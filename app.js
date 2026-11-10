@@ -8,7 +8,7 @@ const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_
 async function checkAuth() {
   const { data: { session } } = await supabaseClient.auth.getSession();
   if (!session) {
-    window.location.href = 'index.html';
+    window.location.replace('login.html');
   } else {
     updateUserInfo(session);
   }
@@ -53,7 +53,8 @@ async function handleLogout() {
   if (error) {
     alert("Gagal keluar: " + error.message);
   } else {
-    window.location.href = 'index.html';
+    // Menggunakan replace agar riwayat halaman diganti bersih ke halaman login
+    window.location.replace('login.html');
   }
 }
 
@@ -64,7 +65,7 @@ const inactivityLimit = 15 * 60 * 1000;
 async function triggerAutoLogout() {
   await supabaseClient.auth.signOut();
   alert("Sesi Anda telah kedaluwarsa karena tidak ada aktivitas. Silakan login kembali.");
-  window.location.href = 'index.html';
+  window.location.replace('login.html');
 }
 
 function resetInactivityTimer() {
@@ -184,7 +185,7 @@ document.getElementById('artist-release-form').addEventListener('submit', async 
   const { data: { session }, error: sessionError } = await supabaseClient.auth.getSession();
   if (sessionError || !session) {
     alert("Sesi login kedaluwarsa. Silakan sign in ulang.");
-    window.location.href = 'index.html';
+    window.location.replace('login.html');
     return;
   }
 
