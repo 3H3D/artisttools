@@ -1,0 +1,201 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --tc-bg-dark: #000000;
+  --tc-bg-sidebar: #05070a;
+  --tc-bg-card: #0d1117;
+  --tc-bg-input: #040609;
+  --tc-border: rgba(255, 255, 255, 0.08);
+  --tc-red: #ff2a2a;
+  --tc-red-glow: rgba(255, 42, 42, 0.25);
+  --tc-text: #ffffff;
+  --tc-muted: #8b949e;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+body { background-color: var(--tc-bg-dark); color: var(--tc-text); min-height: 100vh; }
+
+.tunecore-layout { display: flex; width: 100%; min-height: 100vh; }
+
+/* SIDEBAR STYLING (UNTUK LAPTOP / DESKTOP) */
+.tc-sidebar {
+  width: 270px;
+  min-width: 270px;
+  background: var(--tc-bg-sidebar);
+  border-right: 1px solid var(--tc-border);
+  padding: 28px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+
+.tc-brand { display: flex; align-items: center; gap: 14px; margin-bottom: 36px; }
+.brand-logo {
+  width: 42px; height: 42px; background: var(--tc-red); border-radius: 10px;
+  display: flex; align-items: center; justify-content: center; font-size: 20px; color: #fff;
+  box-shadow: 0 0 18px var(--tc-red-glow);
+}
+.brand-name h2 { font-size: 18px; font-weight: 800; letter-spacing: 0.5px; }
+.brand-name span { font-size: 10px; color: var(--tc-red); font-weight: 700; letter-spacing: 1px; }
+
+.tc-nav { display: flex; flex-direction: column; gap: 6px; }
+.tc-nav-item {
+  display: flex; align-items: center; gap: 14px; padding: 14px 16px; color: var(--tc-muted);
+  text-decoration: none; font-size: 14px; font-weight: 600; border-radius: 8px; transition: 0.2s;
+}
+.tc-nav-item:hover, .tc-nav-item.active { background: rgba(255, 42, 42, 0.12); color: var(--tc-red); }
+
+.tc-user-card {
+  display: flex; align-items: center; gap: 12px; padding: 12px 14px;
+  background: var(--tc-bg-card); border: 1px solid var(--tc-border); border-radius: 10px;
+}
+.user-avatar {
+  width: 36px; height: 36px; background: #1f242d; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px; color: var(--tc-red);
+}
+.artist-name { font-size: 13px; font-weight: 700; color: #fff; }
+.account-type { font-size: 11px; color: var(--tc-red); font-weight: 600; }
+
+/* MAIN CONTENT */
+.tc-main { flex: 1; padding: 40px 48px; overflow-y: auto; height: 100vh; }
+.tc-topbar { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 32px; gap: 16px; }
+.page-headline { font-size: 26px; font-weight: 800; color: #fff; }
+.page-subline { font-size: 14px; color: var(--tc-muted); margin-top: 6px; }
+
+.badge-direct {
+  background: rgba(255, 42, 42, 0.1); border: 1px solid rgba(255, 42, 42, 0.3);
+  color: var(--tc-red); padding: 8px 16px; border-radius: 20px; font-size: 12px; font-weight: 700;
+  display: flex; align-items: center; gap: 8px; box-shadow: 0 0 12px rgba(255, 42, 42, 0.15);
+  white-space: nowrap;
+}
+
+/* CARDS & FORMS */
+.tc-card {
+  background: var(--tc-bg-card); border: 1px solid var(--tc-border);
+  border-radius: 16px; padding: 32px; margin-bottom: 28px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+.card-header-tc { display: flex; gap: 16px; align-items: center; margin-bottom: 24px; }
+.step-num {
+  font-size: 16px; font-weight: 800; color: #fff;
+  background: var(--tc-red); padding: 8px 14px; border-radius: 8px;
+  box-shadow: 0 0 12px var(--tc-red-glow);
+}
+.card-header-tc h3 { font-size: 18px; font-weight: 700; color: #fff; }
+.card-header-tc p { font-size: 13px; color: var(--tc-muted); }
+
+/* FULL-WIDTH DROPZONE */
+.tc-dropzone {
+  border: 2px dashed var(--tc-border); border-radius: 12px; padding: 36px 20px;
+  text-align: center; background: var(--tc-bg-input); cursor: pointer; transition: 0.2s;
+  width: 100%;
+}
+.tc-dropzone:hover { border-color: var(--tc-red); background: rgba(255, 42, 42, 0.03); }
+.tc-drop-icon { font-size: 40px; color: var(--tc-red); margin-bottom: 12px; }
+.tc-dropzone h4 { font-size: 16px; font-weight: 700; margin-bottom: 4px; color: #fff; }
+.tc-dropzone p { font-size: 14px; color: var(--tc-muted); }
+.tc-hint { font-size: 12px; color: #6e7681; display: block; margin-top: 8px; }
+
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.input-block label { display: block; font-size: 13px; font-weight: 700; color: #c9d1d9; margin-bottom: 8px; }
+.label-flex { display: flex; justify-content: space-between; align-items: center; }
+
+input[type="text"] {
+  width: 100%; padding: 14px 16px; background: var(--tc-bg-input);
+  border: 1px solid var(--tc-border); border-radius: 8px; color: var(--tc-text);
+  font-size: 14px; font-weight: 500; transition: 0.2s;
+}
+input[type="text"]:focus { outline: none; border-color: var(--tc-red); box-shadow: 0 0 12px var(--tc-red-glow); }
+
+.tc-btn-gen {
+  background: rgba(255, 42, 42, 0.15); color: var(--tc-red); border: none;
+  padding: 6px 12px; font-size: 11px; font-weight: 700; border-radius: 4px; cursor: pointer;
+}
+.tc-btn-gen:hover { background: var(--tc-red); color: #fff; }
+.field-info { font-size: 11px; color: var(--tc-muted); margin-top: 6px; display: block; }
+
+.form-footer-action { margin-top: 12px; margin-bottom: 40px; }
+
+.tc-btn-submit {
+  background: var(--tc-red); color: #fff; border: none; padding: 16px 32px;
+  border-radius: 10px; font-size: 16px; font-weight: 800; cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px; transition: 0.2s;
+  box-shadow: 0 4px 20px var(--tc-red-glow);
+}
+.tc-btn-submit:hover { transform: translateY(-2px); background: #e02424; }
+
+/* =========================================================
+   PENGATURAN KHUSUS LAYAR HP / PONSEL (AGAR TIDAK BERANTAKAN)
+   ========================================================= */
+@media screen and (max-width: 900px) {
+  /* Ubah layout utama menjadi satu kolom ke bawah */
+  .tunecore-layout {
+    flex-direction: column;
+    height: auto;
+  }
+
+  /* Header Atas di HP agar menyesuaikan lebar layar */
+  .top-header-banner {
+    flex-direction: column;
+    align-items: stretch !important;
+    gap: 16px !important;
+    padding: 16px 20px !important;
+  }
+
+  /* Menu Navigasi di HP bisa digeser ke samping (Horizontal Scroll) */
+  .tc-nav {
+    flex-direction: row !important;
+    overflow-x: auto;
+    gap: 8px;
+    padding-bottom: 6px;
+    width: 100%;
+    scrollbar-width: none; /* Hilangkan scrollbar di Firefox */
+  }
+  
+  .tc-nav::-webkit-scrollbar {
+    display: none; /* Hilangkan scrollbar di Chrome/Safari */
+  }
+
+  .tc-nav-item {
+    white-space: nowrap;
+    padding: 8px 12px;
+    font-size: 12px;
+    flex-shrink: 0;
+  }
+
+  /* Kartu Profil Artis menyesuaikan lebar di HP */
+  .tc-user-card {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  /* Konten utama di HP */
+  .tc-main {
+    height: auto;
+    padding: 20px 16px !important;
+    width: 100%;
+  }
+
+  /* Form input menjadi 1 kolom ke bawah agar tidak gepeng */
+  .form-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  /* Tombol Submit memenuhi lebar layar HP agar mudah ditekan */
+  .tc-btn-submit {
+    width: 100%;
+  }
+
+  /* Kartu Upload dan Form di HP */
+  .tc-card {
+    padding: 20px 16px;
+  }
+
+  .upload-row {
+    grid-template-columns: 1fr !important;
+  }
+}
