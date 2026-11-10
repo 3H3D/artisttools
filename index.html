@@ -112,7 +112,7 @@
               </div>
             </div>
 
-            <!-- SECTION 2: METADATA -->
+ <!-- SECTION 2: METADATA -->
 <div class="tc-card" style="background: #111; border: 1px solid #222; padding: 24px; border-radius: 12px; margin-bottom: 24px;">
   <div class="card-header-tc" style="display: flex; gap: 16px; margin-bottom: 20px;">
     <span class="step-num" style="background: #ff2a2a; color: #fff; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; flex-shrink: 0;">02</span>
@@ -152,8 +152,11 @@
               <option value="Remixer">Remixer</option>
             </select>
             <input type="text" id="artist-input" placeholder="e.g. 3H3D" required style="width: 100%; padding: 12px; background: #07090f; border: 1px solid #222; color: #fff; border-radius: 6px; font-size: 12px; box-sizing: border-box;">
-            <!-- Tombol kosong agar sejajar rapi dengan baris tambahan di bawahnya -->
-            <div style="width: 42px;"></div>
+            
+            <!-- Tombol Hapus Sampah pada Baris Utama Primary Artist agar Seragam -->
+            <button type="button" onclick="this.parentElement.remove()" style="background: #1a1111; color: #ff5555; border: 1px solid #332222; padding: 12px 14px; border-radius: 6px; cursor: pointer;" title="Remove">
+              <i class="fa-solid fa-trash"></i>
+            </button>
           </div>
         </div>
       </div>
@@ -201,7 +204,7 @@
 
         <!-- Wadah baris kredit dinamis -->
         <div id="credits-container" style="display: flex; flex-direction: column; gap: 10px;">
-          <!-- Baris Default Utama (Grid 180px untuk pilihan di kiri, 1fr untuk input di kanan) -->
+          <!-- Baris Default Utama (Grid 180px untuk pilihan di kiri, 1fr untuk input di kanan, dilengkapi tombol hapus sampah) -->
           <div class="credit-row" style="display: grid; grid-template-columns: 180px 1fr auto; gap: 10px; align-items: center;">
             <select class="credit-role" style="padding: 12px; background: #07090f; border: 1px solid #222; color: #fff; border-radius: 6px; font-size: 12px;">
               <option value="Composer">Composer (Pencipta)</option>
