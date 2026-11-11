@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cover Art Division - Ferwap Music</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body style="display:flex; flex-direction:column; min-height:100vh; margin:0; background-color:#0b0f19; color:#fff; font-family:sans-serif;">
+
+  <div class="tunecore-layout" style="display:flex; flex-direction:column; min-height:100vh;">
+    
+    <!-- MAIN HEADER -->
+    <header class="top-header-banner" style="background: #07090f; border-bottom: 1px solid #1f2937; padding: 16px 40px; display: flex; justify-content: space-between; align-items: center; width: 100%; box-sizing: border-box;">
+      <div class="tc-brand" style="display: flex; align-items: center; gap: 12px;">
+        <div class="brand-logo" style="background: #ff2a2a; color: #fff; width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+          <i class="fa-solid fa-bolt-lightning"></i>
+        </div>
+        <div class="brand-name">
+          <h2 style="margin: 0; font-size: 18px;">FERWAP</h2>
+          <span style="font-size: 12px; color: #888;">Ferwap Group</span>
+        </div>
+      </div>
+
+      <nav class="tc-nav" style="display: flex; flex-direction: row; gap: 12px; align-items: center;">
+        <a href="index.html" class="tc-nav-item active" style="color: #fff; background: #111827; text-decoration: none; padding: 8px 14px; border-radius: 6px; display: flex; align-items: center; gap: 8px; font-size: 13px;">
+          <i class="fa-solid fa-cloud-arrow-up"></i> New Release
+        </a>
+      </nav>
+
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <div class="tc-user-card" style="display: flex; align-items: center; gap: 12px; background: #111; padding: 8px 14px; border-radius: 8px; border: 1px solid #222;">
+          <div id="user-avatar" class="user-avatar" style="background: #333; color: #fff; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: bold;">U</div>
+          <div class="user-meta">
+            <p id="user-display-name" class="artist-name" style="margin: 0; font-size: 13px; font-weight: bold;">Loading...</p>
+            <span class="account-type" style="font-size: 10px; color: #10b981;">Verified Artist</span>
+          </div>
+        </div>
+        <button onclick="handleLogout()" style="background: #1f2937; color: #ff5555; border: 1px solid #374151; padding: 10px 14px; border-radius: 8px; cursor: pointer; font-size: 13px; font-weight: bold; display: flex; align-items: center; gap: 6px;" title="Sign Out">
+          <i class="fa-solid fa-right-from-bracket"></i> Logout
+        </button>
+      </div>
+    </header>
+
+    <!-- MAIN PORTAL CONTENT -->
+    <main class="tc-main" style="flex:1; display:flex; flex-direction:column; justify-content:space-between; overflow-y: auto; width: 100%; padding: 0;">
+      
+      <div style="padding: 40px; max-width: 800px; margin: 0 auto; width: 100%; box-sizing: border-box;">
+        <section class="app-section">
+          
+          <header class="tc-topbar" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+            <div>
+              <h1 class="page-headline" style="margin: 0 0 8px 0; font-size: 24px;">Cover Art Division</h1>
+              <p class="page-subline" style="margin: 0; color: #a0a0a0; font-size: 14px;">Strict dimension verification for global DSP compliance.</p>
+            </div>
+            <div class="badge-direct" style="background: #111; border: 1px solid #222; padding: 8px 14px; border-radius: 20px; font-size: 12px; color: #10b981; display: flex; align-items: center; gap: 8px;">
+              <i class="fa-solid fa-image"></i> Art Division Active
+            </div>
+          </header>
+
+          <!-- GUIDELINES & UPLOAD CARD -->
+          <div class="tc-card" style="background: #111; border: 1px solid #222; padding: 24px; border-radius: 12px; margin-bottom: 24px;">
+            
+            <div class="card-header-tc" style="display: flex; gap: 16px; margin-bottom: 20px;">
+              <span class="step-num" style="background: #ff2a2a; color: #fff; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; flex-shrink: 0;">01</span>
+              <div>
+                <h3 style="margin: 0 0 4px 0; font-size: 16px;">Strict Artwork Guidelines & Upload</h3>
+                <p style="margin: 0; color: #a0a0a0; font-size: 13px;">Review rules before dropping your file. System strictly blocks invalid resolutions.</p>
+              </div>
+            </div>
+
+            <!-- COMPLIANCE CHECKLIST BOX -->
+            <div style="background: #07090f; border: 1px solid #222; padding: 16px; border-radius: 8px; margin-bottom: 20px; font-size: 13px;">
+              <div style="font-weight: bold; margin-bottom: 10px; color: #fff;"><i class="fa-solid fa-circle-info" style="color: #10b981;"></i> Standard Compliance Checklist:</div>
+              <ul style="margin: 0; padding-left: 20px; color: #a0a0a0; display: flex; flex-direction: column; gap: 6px;">
+                <li><span style="color: #10b981; font-weight: bold;">✔</span> Mandatory format: High-quality <strong>JPG</strong> or <strong>PNG</strong>.</li>
+                <li><span style="color: #10b981; font-weight: bold;">✔</span> Mandatory ratio: Perfect square / Square format (1:1).</li>
+                <li><span style="color: #10b981; font-weight: bold;">✔</span> Minimum resolution: <strong>3000 x 3000 pixels</strong>.</li>
+                <li><span style="color: #ff5555; font-weight: bold;">❌</span> Images below 3000px are strictly prohibited (Automatically rejected by system).</li>
+                <li><span style="color: #ff5555; font-weight: bold;">❌</span> Non-square images (portrait or landscape) are strictly prohibited.</li>
+              </ul>
+            </div>
+
+            <!-- Dropzone Area -->
+            <div class="tc-dropzone" onclick="document.getElementById('cover-input').click()" style="border: 2px dashed #333; padding: 40px; text-align: center; border-radius: 8px; cursor: pointer; background: #07090f; transition: 0.2s;">
+              <input type="file" id="cover-input" accept="image/jpeg, image/png" hidden onchange="validateCoverArt(this)">
+              <div id="cover-drop-content">
+                <i id="art-icon" class="fa-solid fa-image" style="font-size: 40px; color: #ff2a2a; margin-bottom: 12px;"></i>
+                <h4 style="margin: 0 0 8px 0; font-size: 16px;">Click or Drop Cover Image Here</h4>
+                <p id="cover-status-text" style="margin: 0 0 8px 0; font-size: 13px; color: #828ca0;">Waiting for image upload...</p>
+                <span class="tc-hint" style="font-size: 11px; color: #555; display: block; margin-top: 6px;">Strictly Min. 3000 x 3000px (Square)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- NAVIGATION BUTTONS -->
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 24px;">
+            <a href="audio.html" style="background: #1f2937; color: #fff; padding: 12px 20px; border-radius: 6px; text-decoration: none; font-size: 13px; font-weight: bold; border: 1px solid #374151;">
+              <i class="fa-solid fa-arrow-left" style="margin-right: 6px;"></i> Back to Audio
+            </a>
+            <a id="next-btn" href="index.html" style="background: #374151; color: #aaa; padding: 12px 24px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 13px; pointer-events: none;" title="Upload valid artwork first">
+              Next: Metadata & Submit <i class="fa-solid fa-arrow-right" style="margin-left: 6px;"></i>
+            </a>
+          </div>
+
+        </section>
+      </div>
+
+      <!-- GLOBAL FOOTER -->
+      <footer class="site-footer" style="width: 100%; background: #ff2a2a; color: #fff; font-size: 13px; box-sizing: border-box; padding: 24px 48px; border-top: 1px solid rgba(0, 0, 0, 0.1);">
+        <div style="max-width: 1200px; margin: 0 auto; width: 100%; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div style="background: #000; color: #fff; width: 32px; height: 32px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 14px;">
+              <i class="fa-solid fa-bolt-lightning"></i>
+            </div>
+            <div>
+              <h4 style="margin: 0; font-size: 14px; font-weight: 800; color: #000;">FERWAP MUSIC</h4>
+              <span style="font-size: 11px; color: #fff; opacity: 0.9;">Ferwap Group</span>
+            </div>
+          </div>
+          <p style="margin: 0; font-size: 12px; color: #000; font-weight: 600;">
+            &copy; 2026 Ferwap Music Entertainment. All Rights Reserved.
+          </p>
+        </div>
+      </footer>
+    </main>
+  </div>
+  
+  <!-- Strict Validation Script -->
+  <script>
+    function validateCoverArt(input) {
+      const statusText = document.getElementById('cover-status-text');
+      const artIcon = document.getElementById('art-icon');
+      const nextBtn = document.getElementById('next-btn');
+
+      if (input.files && input.files[0]) {
+        const file = input.files[0];
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+          const img = new Image();
+          img.src = e.target.result;
+
+          img.onload = function () {
+            const width = img.width;
+            const height = img.height;
+
+            // Strict Rules: Minimum 3000x3000px AND must be square (width === height)
+            if (width < 3000 || height < 3000) {
+              statusText.innerHTML = `<span style="color: #ff5555; font-weight: bold;">❌ REJECTED: Resolution is ${width}x${height}px. Minimum required is 3000x3000px!</span>`;
+              artIcon.className = "fa-solid fa-circle-xmark";
+              artIcon.style.color = "#ff5555";
+              input.value = ""; // Reset file
+              
+              // Lock next button
+              nextBtn.style.background = "#374151";
+              nextBtn.style.color = "#aaa";
+              nextBtn.style.pointerEvents = "none";
+            } else if (width !== height) {
+              statusText.innerHTML = `<span style="color: #ff5555; font-weight: bold;">❌ REJECTED: Aspect ratio ${width}x${height}px is not square (must be 1:1).</span>`;
+              artIcon.className = "fa-solid fa-circle-xmark";
+              artIcon.style.color = "#ff5555";
+              input.value = "";
+
+              nextBtn.style.background = "#374151";
+              nextBtn.style.color = "#aaa";
+              nextBtn.style.pointerEvents = "none";
+            } else {
+              // PASSED STRICT VALIDATION
+              statusText.innerHTML = `<span style="color: #10b981; font-weight: bold;">✔ SUCCESS: ${file.name} (${width}x${height}px - Valid DSP Compliance)</span>`;
+              artIcon.className = "fa-solid fa-circle-check";
+              artIcon.style.color = "#10b981";
+
+              // Unlock next button
+              nextBtn.style.background = "#ff2a2a";
+              nextBtn.style.color = "#fff";
+              nextBtn.style.pointerEvents = "auto";
+            }
+          };
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="app.js"></script>
+</body>
+</html>
