@@ -6,42 +6,6 @@
   <title>Ferwap Music Distribution - Artist Dashboard</title>
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    /* Styling Dropdown Bersih Tanpa Icon Siku/Panah */
-    .dropdown {
-      position: relative;
-      display: inline-block;
-    }
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      background-color: #111827;
-      min-width: 180px;
-      box-shadow: 0px 8px 24px rgba(0,0,0,0.5);
-      border: 1px solid #1f2937;
-      border-radius: 8px;
-      z-index: 1000;
-      margin-top: 6px;
-      overflow: hidden;
-    }
-    .dropdown-content a {
-      color: #9ca3af;
-      padding: 10px 16px;
-      text-decoration: none;
-      display: block;
-      font-size: 13px;
-      transition: 0.2s;
-    }
-    .dropdown-content a:hover {
-      background-color: #1f2937;
-      color: #fff;
-    }
-    .dropdown.active .dropdown-content {
-      display: block;
-    }
-  </style>
 </head>
 <body style="display:flex; flex-direction:column; min-height:100vh; margin:0; background-color:#0b0f19; color:#fff; font-family:sans-serif;">
 
@@ -60,47 +24,20 @@
         </div>
       </div>
 
-      <!-- NAVIGASI UTAMA (DASBOR, CATALOG, ANALYTICS, ROYALTIES) DENGAN DROPDOWN -->
+      <!-- NAVIGASI UTAMA STANDAR -->
       <nav class="tc-nav" style="display: flex; flex-direction: row; gap: 12px; align-items: center;">
-        
-        <!-- 1. Dasbor -->
         <a href="index.html" class="tc-nav-item active" style="color: #fff; background: #111827; text-decoration: none; padding: 8px 14px; border-radius: 6px; display: flex; align-items: center; gap: 8px; font-size: 13px;">
-          <i class="fa-solid fa-house"></i> Dasbor
+          <i class="fa-solid fa-house"></i> Dashboard
         </a>
-
-        <!-- 2. Catalog (Dropdown) -->
-        <div class="dropdown" id="drop-catalog">
-          <button onclick="toggleDropdown(event, 'drop-catalog')" style="background: transparent; color: #a0a0a0; border: none; padding: 8px 14px; border-radius: 6px; display: flex; align-items: center; gap: 8px; font-size: 13px; cursor: pointer;">
-            <i class="fa-solid fa-compact-disc"></i> Catalog
-          </button>
-          <div class="dropdown-content">
-            <a href="catalog">Lihat Katalog</a>
-            <a href="audio.html">Rilis Baru</a>
-          </div>
-        </div>
-
-        <!-- 3. Analytics (Dropdown) -->
-        <div class="dropdown" id="drop-analytics">
-          <button onclick="toggleDropdown(event, 'drop-analytics')" style="background: transparent; color: #a0a0a0; border: none; padding: 8px 14px; border-radius: 6px; display: flex; align-items: center; gap: 8px; font-size: 13px; cursor: pointer;">
-            <i class="fa-solid fa-chart-line"></i> Analytics
-          </button>
-          <div class="dropdown-content">
-            <a href="analytics">Statistik Streaming</a>
-            <a href="analytics">Laporan Audiens</a>
-          </div>
-        </div>
-
-        <!-- 4. Royalties (Dropdown) -->
-        <div class="dropdown" id="drop-royalties">
-          <button onclick="toggleDropdown(event, 'drop-royalties')" style="background: transparent; color: #a0a0a0; border: none; padding: 8px 14px; border-radius: 6px; display: flex; align-items: center; gap: 8px; font-size: 13px; cursor: pointer;">
-            <i class="fa-solid fa-wallet"></i> Royalties
-          </button>
-          <div class="dropdown-content">
-            <a href="royalties">Saldo & Payout</a>
-            <a href="royalties">Riwayat Pendapatan</a>
-          </div>
-        </div>
-
+        <a href="catalog" class="tc-nav-item" style="color: #a0a0a0; text-decoration: none; padding: 8px 14px; border-radius: 6px; display: flex; align-items: center; gap: 8px; font-size: 13px;">
+          <i class="fa-solid fa-compact-disc"></i> Catalog
+        </a>
+        <a href="analytics" class="tc-nav-item" style="color: #a0a0a0; text-decoration: none; padding: 8px 14px; border-radius: 6px; display: flex; align-items: center; gap: 8px; font-size: 13px;">
+          <i class="fa-solid fa-chart-line"></i> Analytics
+        </a>
+        <a href="royalties" class="tc-nav-item" style="color: #a0a0a0; text-decoration: none; padding: 8px 14px; border-radius: 6px; display: flex; align-items: center; gap: 8px; font-size: 13px;">
+          <i class="fa-solid fa-wallet"></i> Royalties
+        </a>
       </nav>
 
       <div style="display: flex; align-items: center; gap: 12px;">
@@ -179,7 +116,7 @@
               </div>
               <div>
                 <h3 style="margin: 0 0 4px 0; font-size: 16px; color: #fff;">Ready to distribute your next track?</h3>
-                <p style="margin: 0; color: #9ca3af; font-size: 13px;">Follow our streamlined distribution pipeline: Audio -> Metadata -> Cover Art & Stores Selection.</p>
+                <p style="margin: 0; color: #9ca3af; font-size: 13px;">Follow our streamlined distribution pipeline: Audio $\rightarrow$ Metadata $\rightarrow$ Cover Art & Stores Selection.</p>
               </div>
             </div>
             <a href="audio.html" style="background: #1f2937; color: #10b981; border: 1px solid #374151; padding: 12px 20px; border-radius: 8px; text-decoration: none; font-size: 13px; font-weight: bold; display: flex; align-items: center; gap: 8px;">
@@ -224,26 +161,6 @@
 
   </div>
   
-  <!-- JavaScript untuk Dropdown Tanpa Icon Panah -->
-  <script>
-    function toggleDropdown(event, dropdownId) {
-      event.stopPropagation();
-      document.querySelectorAll('.dropdown').forEach(drop => {
-        if (drop.id !== dropdownId) {
-          drop.classList.remove('active');
-        }
-      });
-      document.getElementById(dropdownId).classList.toggle('active');
-    }
-
-    window.onclick = function(event) {
-      if (!event.target.matches('.dropdown button') && !event.target.matches('.dropdown button *')) {
-        document.querySelectorAll('.dropdown').forEach(drop => {
-          drop.classList.remove('active');
-        });
-      }
-    }
-  </script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="app.js"></script>
 </body>
