@@ -139,7 +139,7 @@ async function loadCatalogData() {
       <div style="background:#111; border:1px solid #222; padding:16px; border-radius:8px; display:flex; justify-content:space-between; align-items:center;">
         <div>
           <h4 style="margin:0; color:#fff;">${rel.title || 'Untitled'}</h4>
-          <span style="font-size:12px; color:#a0a0a0;">Artist: ${rel.artist || '-'}</span>
+          <span style="font-size:12px; color:#a0a0a0;">Artist: ${rel.artist || '-'} | Status: ${rel.status || 'Pending Approval'}</span>
         </div>
         <div style="text-align:right; font-size:12px; color:#888;">
           <div>UPC: ${rel.upc || 'Pending (B2B Sync)'}</div>
@@ -380,7 +380,7 @@ if (releaseForm) {
       coverUrl = coverData.path;
     }
 
-    // 3. Simpan ke Database dengan Metadata Lengkap
+    // 3. Simpan ke Database dengan Status Pending Approval (Menunggu ACC Admin)
     const { error: dbError } = await supabaseClient
       .from('releases')
       .insert([
@@ -396,7 +396,8 @@ if (releaseForm) {
           upc: null, 
           isrc: null,
           audio_url: audioUrl,
-          cover_url: coverUrl
+          cover_url: coverUrl,
+          status: 'Pending Approval' // Menahan rilis agar menunggu persetujuan admin
         }
       ]);
 
@@ -408,7 +409,7 @@ if (releaseForm) {
     if (dbError) {
       alert("Gagal menyimpan ke database: " + dbError.message);
     } else {
-      alert(`Berhasil! Rilis "${releaseTitle}" berhasil dikirim ke server. Menunggu sinkronisasi kode dari sistem B2B.`);
+      alert(`Berhasil! Rilis "${releaseTitle}" berhasil dikirim dan kini menunggu persetujuan (*approval*) dari Admin Ferwap Music.`);
       this.reset();
       window.location.replace('index.html');
     }
