@@ -6,6 +6,60 @@
   <title>Ferwap Music Distribution - Artist Dashboard</title>
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* Styling Dropdown Navigasi Dasbor */
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    .dropdown-btn {
+      background: transparent;
+      color: #a0a0a0;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .dropdown.active .dropdown-btn,
+    .dropdown-btn.active {
+      color: #fff;
+      background: #111827;
+    }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: #111827;
+      min-width: 160px;
+      box-shadow: 0px 8px 24px rgba(0,0,0,0.5);
+      border: 1px solid #1f2937;
+      border-radius: 8px;
+      z-index: 1000;
+      margin-top: 6px;
+      overflow: hidden;
+    }
+    .dropdown-content a {
+      color: #9ca3af;
+      padding: 10px 14px;
+      text-decoration: none;
+      display: block;
+      font-size: 13px;
+      transition: 0.2s;
+    }
+    .dropdown-content a:hover {
+      background-color: #1f2937;
+      color: #fff;
+    }
+    .dropdown.active .dropdown-content {
+      display: block;
+    }
+  </style>
 </head>
 <body style="display:flex; flex-direction:column; min-height:100vh; margin:0; background-color:#0b0f19; color:#fff; font-family:sans-serif;">
 
@@ -24,20 +78,53 @@
         </div>
       </div>
 
-      <!-- NAVIGASI UTAMA STANDAR -->
+      <!-- NAVIGASI UTAMA DENGAN DROPDOWN DI DALAM DASBOR -->
       <nav class="tc-nav" style="display: flex; flex-direction: row; gap: 12px; align-items: center;">
-        <a href="index.html" class="tc-nav-item active" style="color: #fff; background: #111827; text-decoration: none; padding: 8px 14px; border-radius: 6px; display: flex; align-items: center; gap: 8px; font-size: 13px;">
-          <i class="fa-solid fa-house"></i> Dashboard
-        </a>
-        <a href="catalog" class="tc-nav-item" style="color: #a0a0a0; text-decoration: none; padding: 8px 14px; border-radius: 6px; display: flex; align-items: center; gap: 8px; font-size: 13px;">
-          <i class="fa-solid fa-compact-disc"></i> Catalog
-        </a>
-        <a href="analytics" class="tc-nav-item" style="color: #a0a0a0; text-decoration: none; padding: 8px 14px; border-radius: 6px; display: flex; align-items: center; gap: 8px; font-size: 13px;">
-          <i class="fa-solid fa-chart-line"></i> Analytics
-        </a>
-        <a href="royalties" class="tc-nav-item" style="color: #a0a0a0; text-decoration: none; padding: 8px 14px; border-radius: 6px; display: flex; align-items: center; gap: 8px; font-size: 13px;">
-          <i class="fa-solid fa-wallet"></i> Royalties
-        </a>
+        
+        <!-- Dashboard Dropdown -->
+        <div class="dropdown" id="drop-dashboard">
+          <button onclick="toggleDropdown(event, 'drop-dashboard')" class="dropdown-btn active">
+            <i class="fa-solid fa-house"></i> Dashboard
+          </button>
+          <div class="dropdown-content">
+            <a href="index.html">Overview</a>
+            <a href="audio.html">New Release</a>
+          </div>
+        </div>
+
+        <!-- Catalog Dropdown -->
+        <div class="dropdown" id="drop-catalog">
+          <button onclick="toggleDropdown(event, 'drop-catalog')" class="dropdown-btn">
+            <i class="fa-solid fa-compact-disc"></i> Catalog
+          </button>
+          <div class="dropdown-content">
+            <a href="catalog">My Catalog</a>
+            <a href="catalog">Releases List</a>
+          </div>
+        </div>
+
+        <!-- Analytics Dropdown -->
+        <div class="dropdown" id="drop-analytics">
+          <button onclick="toggleDropdown(event, 'drop-analytics')" class="dropdown-btn">
+            <i class="fa-solid fa-chart-line"></i> Analytics
+          </button>
+          <div class="dropdown-content">
+            <a href="analytics">Streaming Stats</a>
+            <a href="analytics">Audience Data</a>
+          </div>
+        </div>
+
+        <!-- Royalties Dropdown -->
+        <div class="dropdown" id="drop-royalties">
+          <button onclick="toggleDropdown(event, 'drop-royalties')" class="dropdown-btn">
+            <i class="fa-solid fa-wallet"></i> Royalties
+          </button>
+          <div class="dropdown-content">
+            <a href="royalties">Balance & Payout</a>
+            <a href="royalties">Earnings History</a>
+          </div>
+        </div>
+
       </nav>
 
       <div style="display: flex; align-items: center; gap: 12px;">
@@ -161,6 +248,26 @@
 
   </div>
   
+  <!-- JavaScript untuk Dropdown Navigasi Dasbor -->
+  <script>
+    function toggleDropdown(event, dropdownId) {
+      event.stopPropagation();
+      document.querySelectorAll('.dropdown').forEach(drop => {
+        if (drop.id !== dropdownId) {
+          drop.classList.remove('active');
+        }
+      });
+      document.getElementById(dropdownId).classList.toggle('active');
+    }
+
+    window.onclick = function(event) {
+      if (!event.target.matches('.dropdown-btn') && !event.target.matches('.dropdown-btn *')) {
+        document.querySelectorAll('.dropdown').forEach(drop => {
+          drop.classList.remove('active');
+        });
+      }
+    }
+  </script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="app.js"></script>
 </body>
