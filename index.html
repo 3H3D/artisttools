@@ -11,7 +11,7 @@
 
   <div class="tunecore-layout" style="display:flex; flex-direction:column; min-height:100vh;">
     
-    <!-- MAIN HEADER (TETAP UTUH) -->
+    <!-- MAIN HEADER -->
     <header class="top-header-banner" style="background: #07090f; border-bottom: 1px solid #1f2937; padding: 16px 40px; display: flex; justify-content: space-between; align-items: center; width: 100%; box-sizing: border-box;">
       
       <div class="tc-brand" style="display: flex; align-items: center; gap: 12px;">
@@ -55,177 +55,73 @@
 
     </header>
 
-    <!-- MAIN PORTAL CONTENT (BAGIAN TENGAH YANG DIROMBAK MENJADI DASBOR AGREGATOR PROFESIONAL) -->
+    <!-- MAIN PORTAL CONTENT -->
     <main class="tc-main" style="flex:1; display:flex; flex-direction:column; justify-content:space-between; overflow-y: auto; width: 100%; padding: 0;">
       
-      <div style="padding: 40px; max-width: 1000px; margin: 0 auto; width: 100%; box-sizing: border-box;">
+      <div style="padding: 40px; max-width: 900px; margin: 0 auto; width: 100%; box-sizing: border-box;">
         <section id="section-new-release" class="app-section">
           
-          <!-- Dashboard Top Header Bar -->
-          <header class="tc-topbar" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; background: #111; border: 1px solid #1f2937; padding: 20px 24px; border-radius: 12px;">
+          <header class="tc-topbar" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
             <div>
-              <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
-                <span style="background: rgba(16, 185, 129, 0.15); color: #10b981; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: bold; text-transform: uppercase;">Step 3 of 3</span>
-                <span style="color: #6b7280; font-size: 12px;">• Global Metadata & Publishing Rights</span>
-              </div>
-              <h1 class="page-headline" style="margin: 0; font-size: 22px; font-weight: 700; color: #fff;">Release Metadata & Credits Dashboard</h1>
+              <h1 class="page-headline" style="margin: 0 0 8px 0; font-size: 24px;">New Release Hub</h1>
+              <p class="page-subline" style="margin: 0; color: #a0a0a0; font-size: 14px;">Select a division below to manage your release assets, audio tracks, and metadata.</p>
             </div>
-            <div class="badge-direct" style="background: #07090f; border: 1px solid #222; padding: 8px 16px; border-radius: 20px; font-size: 12px; color: #10b981; display: flex; align-items: center; gap: 8px;">
-              <i class="fa-solid fa-shield-halved"></i> Secure Distribution Pipeline
+            <div class="badge-direct" style="background: #111; border: 1px solid #222; padding: 8px 14px; border-radius: 20px; font-size: 12px; color: #10b981; display: flex; align-items: center; gap: 8px;">
+              <i class="fa-solid fa-globe"></i> Pipeline Active
             </div>
           </header>
 
-          <form id="artist-release-form" class="tc-form-container" style="display: flex; flex-direction: column; gap: 24px;">
+          <!-- CONTAINER NAVIGASI ANTAR DIVISI -->
+          <div style="display: flex; flex-direction: column; gap: 16px;">
             
-            <!-- CARD 1: TRACK & RELEASE IDENTITY -->
-            <div class="tc-card" style="background: #111; border: 1px solid #1f2937; padding: 28px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.5);">
-              <div class="card-header-tc" style="display: flex; align-items: center; gap: 14px; margin-bottom: 24px; border-bottom: 1px solid #1f2937; padding-bottom: 16px;">
-                <div style="background: rgba(255, 42, 42, 0.15); color: #ff2a2a; width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 15px;">
-                  <i class="fa-solid fa-compact-disc"></i>
-                </div>
+            <!-- STEP 1: COVER ART DIVISION -->
+            <div class="tc-card" style="background: #111; border: 1px solid #222; padding: 24px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center;">
+              <div style="display: flex; gap: 16px; align-items: center;">
+                <span class="step-num" style="background: #ff2a2a; color: #fff; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; flex-shrink: 0;">01</span>
                 <div>
-                  <h3 style="margin: 0 0 2px 0; font-size: 16px; font-weight: 600; color: #fff;">Release Identity & Basic Details</h3>
-                  <p style="margin: 0; color: #9ca3af; font-size: 12px;">Specify the official release title, primary performance role, and primary genre.</p>
+                  <h3 style="margin: 0 0 4px 0; font-size: 16px;">Cover Art Division</h3>
+                  <p style="margin: 0; color: #a0a0a0; font-size: 13px;">Manage strict high-resolution artwork compliance (Min. 3000x3000px).</p>
                 </div>
               </div>
-
-              <div style="display: flex; flex-direction: column; gap: 20px;">
-                
-                <!-- Release Title -->
-                <div class="input-block">
-                  <label style="display: block; font-size: 12px; color: #d1d5db; margin-bottom: 6px; font-weight: 500;">Release Title / Track Name</label>
-                  <input type="text" id="title-input" placeholder="e.g. Sogdai Ya" required style="width: 100%; padding: 12px 14px; background: #07090f; border: 1px solid #374151; color: #fff; border-radius: 8px; box-sizing: border-box; font-size: 13px;">
-                </div>
-
-                <!-- Role & Genre Grid -->
-                <div class="row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
-                  <div class="col form-group" style="margin: 0;">
-                    <label for="role" style="display: block; font-size: 12px; color: #d1d5db; margin-bottom: 6px; font-weight: 500;">Primary Performance Role</label>
-                    <select id="role" name="role" required style="width: 100%; padding: 12px 14px; background: #07090f; border: 1px solid #374151; color: #fff; border-radius: 8px; box-sizing: border-box; font-size: 13px;">
-                      <option value="">-- Select Your Role --</option>
-                      <option value="solo_singer">Solo Vocalist / Singer</option>
-                      <option value="songwriter">Songwriter</option>
-                      <option value="producer">Music Producer</option>
-                      <option value="band_group">Band / Group</option>
-                    </select>
-                  </div>
-
-                  <div class="col form-group" style="margin: 0;">
-                    <label for="genre" style="display: block; font-size: 12px; color: #d1d5db; margin-bottom: 6px; font-weight: 500;">Primary Genre</label>
-                    <select id="genre" name="genre" required style="width: 100%; padding: 12px 14px; background: #07090f; border: 1px solid #374151; color: #fff; border-radius: 8px; box-sizing: border-box; font-size: 13px;">
-                      <option value="">-- Select Genre --</option>
-                      <option value="Electronic">Electronic / Dance</option>
-                      <option value="Hip-Hop">Hip-Hop / Rap</option>
-                      <option value="Pop">Pop</option>
-                      <option value="Rock">Rock</option>
-                      <option value="R&B">R&B / Soul</option>
-                      <option value="Alternative">Alternative</option>
-                    </select>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-
-            <!-- CARD 2: ARTIST CREDITS & FEATURING -->
-            <div class="tc-card" style="background: #111; border: 1px solid #1f2937; padding: 28px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.5);">
-              <div class="card-header-tc" style="display: flex; align-items: center; justify-content: between; margin-bottom: 24px; border-bottom: 1px solid #1f2937; padding-bottom: 16px;">
-                <div style="display: flex; align-items: center; gap: 14px;">
-                  <div style="background: rgba(16, 185, 129, 0.15); color: #10b981; width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 15px;">
-                    <i class="fa-solid fa-users"></i>
-                  </div>
-                  <div>
-                    <h3 style="margin: 0 0 2px 0; font-size: 16px; font-weight: 600; color: #fff;">Artist Credits & Featuring</h3>
-                    <p style="margin: 0; color: #9ca3af; font-size: 12px;">Define primary performing artists, featuring acts, or remixers.</p>
-                  </div>
-                </div>
-                <button type="button" onclick="addArtistField()" style="background: #1f2937; color: #10b981; border: 1px solid #374151; padding: 8px 14px; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: 600; display: flex; align-items: center; gap: 6px;">
-                  <i class="fa-solid fa-plus"></i> Add Artist
-                </button>
-              </div>
-
-              <div id="artists-container" style="display: flex; flex-direction: column; gap: 10px;">
-                <div class="artist-row" style="display: grid; grid-template-columns: 180px 1fr; gap: 10px; align-items: center;">
-                  <select class="artist-role" style="padding: 12px 14px; background: #07090f; border: 1px solid #374151; color: #fff; border-radius: 8px; font-size: 13px;">
-                    <option value="Primary Artist">Primary Artist</option>
-                    <option value="Featuring">Featured Artist (Ft.)</option>
-                    <option value="Remixer">Remixer</option>
-                  </select>
-                  <input type="text" id="artist-input" placeholder="e.g. 3H3D" required style="width: 100%; padding: 12px 14px; background: #07090f; border: 1px solid #374151; color: #fff; border-radius: 8px; box-sizing: border-box; font-size: 13px;">
-                </div>
-              </div>
-            </div>
-
-            <!-- CARD 3: SONGWRITERS & PRODUCERS CREDITS -->
-            <div class="tc-card" style="background: #111; border: 1px solid #1f2937; padding: 28px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.5);">
-              <div class="card-header-tc" style="display: flex; align-items: center; justify-content: between; margin-bottom: 24px; border-bottom: 1px solid #1f2937; padding-bottom: 16px;">
-                <div style="display: flex; align-items: center; gap: 14px;">
-                  <div style="background: rgba(59, 130, 246, 0.15); color: #3b82f6; width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 15px;">
-                    <i class="fa-solid fa-pen-nib"></i>
-                  </div>
-                  <div>
-                    <h3 style="margin: 0 0 2px 0; font-size: 16px; font-weight: 600; color: #fff;">Songwriters & Producers Credits</h3>
-                    <p style="margin: 0; color: #9ca3af; font-size: 12px;">Add all legal composers, lyricists, and producers involved in this composition.</p>
-                  </div>
-                </div>
-                <button type="button" onclick="addCreditField()" style="background: #1f2937; color: #10b981; border: 1px solid #374151; padding: 8px 14px; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: 600; display: flex; align-items: center; gap: 6px;">
-                  <i class="fa-solid fa-plus"></i> Add Person
-                </button>
-              </div>
-
-              <div id="credits-container" style="display: flex; flex-direction: column; gap: 10px;">
-                <div class="credit-row" style="display: grid; grid-template-columns: 180px 1fr; gap: 10px; align-items: center;">
-                  <select class="credit-role" style="padding: 12px 14px; background: #07090f; border: 1px solid #374151; color: #fff; border-radius: 8px; font-size: 13px;">
-                    <option value="Composer">Composer</option>
-                    <option value="Lyricist">Lyricist</option>
-                    <option value="Producer">Music Producer</option>
-                    <option value="Co-Producer">Co-Producer</option>
-                  </select>
-                  <input type="text" class="credit-name" placeholder="Enter legal full name" required style="width: 100%; padding: 12px 14px; background: #07090f; border: 1px solid #374151; color: #fff; border-radius: 8px; box-sizing: border-box; font-size: 13px;">
-                </div>
-              </div>
-            </div>
-
-            <!-- CARD 4: COPYRIGHT & PUBLISHING (P-LINE & C-LINE) -->
-            <div class="tc-card" style="background: #111; border: 1px solid #1f2937; padding: 28px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.5);">
-              <div class="card-header-tc" style="display: flex; align-items: center; gap: 14px; margin-bottom: 24px; border-bottom: 1px solid #1f2937; padding-bottom: 16px;">
-                <div style="background: rgba(245, 158, 11, 0.15); color: #f59e0b; width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 15px;">
-                  <i class="fa-solid fa-copyright"></i>
-                </div>
-                <div>
-                  <h3 style="margin: 0 0 2px 0; font-size: 16px; font-weight: 600; color: #fff;">Copyright Ownership & Lines</h3>
-                  <p style="margin: 0; color: #9ca3af; font-size: 12px;">Sound recording (P-Line) and composition (C-Line) copyright declarations.</p>
-                </div>
-              </div>
-
-              <div class="row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
-                <div class="col form-group" style="margin: 0;">
-                  <label style="display: block; font-size: 12px; color: #d1d5db; margin-bottom: 6px; font-weight: 500;">P-Line (Sound Recording Copyright)</label>
-                  <input type="text" id="pline-input" value="2026 Ferwap Music Entertainment" required style="width: 100%; padding: 12px 14px; background: #07090f; border: 1px solid #374151; color: #fff; border-radius: 8px; box-sizing: border-box; font-size: 13px;">
-                </div>
-
-                <div class="col form-group" style="margin: 0;">
-                  <label style="display: block; font-size: 12px; color: #d1d5db; margin-bottom: 6px; font-weight: 500;">C-Line (Composition Copyright)</label>
-                  <input type="text" id="cline-input" value="2026 Ferwap Music Entertainment" required style="width: 100%; padding: 12px; background: #07090f; border: 1px solid #374151; color: #fff; border-radius: 8px; box-sizing: border-box; font-size: 13px;">
-                </div>
-              </div>
-            </div>
-
-            <!-- NAVIGATION & SUBMIT ACTIONS -->
-            <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 10px;">
-              <a href="audio.html" style="background: #1f2937; color: #fff; padding: 14px 20px; border-radius: 8px; text-decoration: none; font-size: 13px; font-weight: 600; border: 1px solid #374151; display: flex; align-items: center; gap: 8px;">
-                <i class="fa-solid fa-arrow-left"></i> Back to Audio
+              <a href="artwork.html" style="background: #1f2937; color: #10b981; border: 1px solid #374151; padding: 10px 16px; border-radius: 6px; text-decoration: none; font-size: 12px; font-weight: bold; display: flex; align-items: center; gap: 8px;">
+                <i class="fa-solid fa-image"></i> Manage Cover Art <i class="fa-solid fa-arrow-right"></i>
               </a>
-              <button type="submit" class="tc-btn-submit" style="background: #ff2a2a; color: #fff; border: none; padding: 14px 32px; border-radius: 8px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 10px; font-size: 15px; box-shadow: 0 4px 15px rgba(255, 42, 42, 0.4);">
-                <i class="fa-solid fa-paper-plane"></i> Submit Release to DSPs
-              </button>
             </div>
 
-          </form>
+            <!-- STEP 2: AUDIO FILES DIVISION -->
+            <div class="tc-card" style="background: #111; border: 1px solid #222; padding: 24px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center;">
+              <div style="display: flex; gap: 16px; align-items: center;">
+                <span class="step-num" style="background: #ff2a2a; color: #fff; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; flex-shrink: 0;">02</span>
+                <div>
+                  <h3 style="margin: 0 0 4px 0; font-size: 16px;">Audio Files Division</h3>
+                  <p style="margin: 0; color: #a0a0a0; font-size: 13px;">Upload master WAV/FLAC audio files for Single, EP, or Album releases.</p>
+                </div>
+              </div>
+              <a href="audio.html" style="background: #1f2937; color: #10b981; border: 1px solid #374151; padding: 10px 16px; border-radius: 6px; text-decoration: none; font-size: 12px; font-weight: bold; display: flex; align-items: center; gap: 8px;">
+                <i class="fa-solid fa-file-waveform"></i> Manage Audio Division <i class="fa-solid fa-arrow-right"></i>
+              </a>
+            </div>
+
+            <!-- STEP 3: RELEASE METADATA DIVISION -->
+            <div class="tc-card" style="background: #111; border: 1px solid #222; padding: 24px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center;">
+              <div style="display: flex; gap: 16px; align-items: center;">
+                <span class="step-num" style="background: #ff2a2a; color: #fff; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; flex-shrink: 0;">03</span>
+                <div>
+                  <h3 style="margin: 0 0 4px 0; font-size: 16px;">Release Metadata Division</h3>
+                  <p style="margin: 0; color: #a0a0a0; font-size: 13px;">Fill in track details, credits, songwriters, and submit release.</p>
+                </div>
+              </div>
+              <a href="metadata.html" style="background: #1f2937; color: #10b981; border: 1px solid #374151; padding: 10px 16px; border-radius: 6px; text-decoration: none; font-size: 12px; font-weight: bold; display: flex; align-items: center; gap: 8px;">
+                <i class="fa-solid fa-pen-to-square"></i> Manage Metadata <i class="fa-solid fa-arrow-right"></i>
+              </a>
+            </div>
+
+          </div>
+
         </section>
       </div>
 
-      <!-- FOOTER GLOBAL (TETAP UTUH) -->
+      <!-- FOOTER GLOBAL -->
       <footer class="site-footer" style="width: 100%; background: #ff2a2a; color: #fff; font-size: 13px; box-sizing: border-box; padding: 24px 48px; border-top: 1px solid rgba(0, 0, 0, 0.1);">
         <div style="max-width: 1200px; margin: 0 auto; width: 100%; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; box-sizing: border-box;">
           
