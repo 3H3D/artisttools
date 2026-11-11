@@ -9,7 +9,6 @@ async function checkAuth() {
   try {
     const { data: { session }, error } = await supabaseClient.auth.getSession();
     if (error || !session) {
-      // Jika tidak ada sesi, langsung pindah bersih ke login.html tanpa jeda kedip
       window.location.replace('login.html');
     } else {
       updateUserInfo(session);
@@ -52,7 +51,6 @@ async function updateUserInfo(session) {
 // FITUR KELUAR (LOGOUT) & KEAMANAN SESI OTOMATIS
 // ----------------------------------------------------
 
-// Fungsi Tombol Logout Manual (Menggunakan replace agar bersih dan tidak looping)
 async function handleLogout() {
   try {
     await supabaseClient.auth.signOut();
@@ -87,8 +85,7 @@ window.onkeypress = resetInactivityTimer;
 window.onclick = resetInactivityTimer;
 window.onscroll = resetInactivityTimer;
 
-
-// Navigasi Menu
+// Navigasi Menu Dashboard
 function navigateTo(sectionId, clickedElement) {
   const sections = document.querySelectorAll('.app-section');
   sections.forEach(sec => sec.style.display = 'none');
@@ -156,17 +153,70 @@ async function loadCatalogData() {
   catalogContainer.innerHTML = html;
 }
 
-function handleAudioSelect(input) {
+// Validasi & Penanganan File Audio Tunggal/Dinamis
+function handleSingleAudioSelect(input) {
+  const statusText = input.parentElement.querySelector('.audio-status-text');
   if (input.files && input.files[0]) {
-    document.getElementById('audio-status-text').innerText = `Selected: ${input.files[0].name}`;
-    document.getElementById('audio-status-text').style.color = "#10b981";
+    statusText.innerText = `Selected: ${input.files[0].name}`;
+    statusText.style.color = "#10b981";
   }
 }
 
+// Validasi Ketat Cover Art (Min 3000x3000px & Format Square)
 function handleCoverSelect(input) {
+  const statusText = document.getElementById('cover-status-text') || input.parentElement.querySelector('.cover-status-text');
+  const nextBtn = document.getElementById('next-btn');
+
   if (input.files && input.files[0]) {
-    document.getElementById('cover-status-text').innerText = `Selected: ${input.files[0].name}`;
-    document.getElementById('cover-status-text').style.color = "#10b981";
+    const file = input.files[0];
+    const img = new Image();
+    const objectUrl = URL.createObjectURL(file);
+
+    img.onload = function() {
+      URL.revokeObjectURL(objectUrl);
+      if (img.width < 3000 || img.height < 3000) {
+        alert(`Resolusi gambar terlalu kecil (${img.width}x${img.height}px). Standar DSP wajib minimal 3000 x 3000 pixels!`);
+        if (statusText) {
+          statusText.innerText = "Error: Resolusi minimal 3000x3000px!";
+          statusText.style.color = "#ff5555";
+        }
+        if (nextBtn) {
+          nextBtn.style.background = "#374151";
+          nextBtn.style.color = "#aaa";
+          nextBtn.style.pointerEvents = "none";
+        }
+        input.value = "";
+        return;
+      }
+
+      if (img.width !== img.height) {
+        alert("Cover art harus berbentuk persegi (Square 1:1 ratio)!");
+        if (statusText) {
+          statusText.innerText = "Error: Rasio harus 1:1 (Persegi)!";
+          statusText.style.color = "#ff5555";
+        }
+        if (nextBtn) {
+          nextBtn.style.background = "#374151";
+          nextBtn.style.color = "#aaa";
+          nextBtn.style.pointerEvents = "none";
+        }
+        input.value = "";
+        return;
+      }
+
+      // Jika Validasi Berhasil
+      if (statusText) {
+        statusText.innerText = `Selected & Verified: ${file.name} (${img.width}x${img.height}px)`;
+        statusText.style.color = "#10b981";
+      }
+      if (nextBtn) {
+        nextBtn.style.background = "#ff2a2a";
+        nextBtn.style.color = "#fff";
+        nextBtn.style.pointerEvents = "auto";
+        nextBtn.title = "Proceed to submit release";
+      }
+    };
+    img.src = objectUrl;
   }
 }
 
@@ -174,7 +224,6 @@ function handleCoverSelect(input) {
 // FUNGSI DINAMIS: TAMBAH ARTIS & KREDIT KONTRIBUTOR
 // ----------------------------------------------------
 
-// Fungsi untuk menambah baris artis (Primary / Featuring / Remixer) secara horizontal
 function addArtistField() {
   const container = document.getElementById('artists-container');
   
@@ -197,7 +246,6 @@ function addArtistField() {
   container.appendChild(wrapper);
 }
 
-// Fungsi untuk menambah baris kredit secara horizontal (Pilihan di kiri, nama di kanan)
 function addCreditField() {
   const container = document.getElementById('credits-container');
   
@@ -222,137 +270,147 @@ function addCreditField() {
 }
 
 // Event Listener Submit: Upload File ke Storage + Simpan Metadata Lengkap ke Database
-document.getElementById('artist-release-form').addEventListener('submit', async function(e) {
-  e.preventDefault();
+const releaseForm = document.getElementById('artist-release-form');
+if (releaseForm) {
+  releaseForm.addEventListener('submit', async function(e) {
+    e.preventDefault();
 
-  const releaseTitle = document.getElementById('title-input').value;
-  const trackGenre = document.getElementById('genre').value;
-  const pLine = document.getElementById('pline-input').value;
-  const cLine = document.getElementById('cline-input').value;
-  
-  // Mengambil data dari baris-baris artis dinamis (Primary Artist & Featuring/Remixer)
-  const artistRows = document.querySelectorAll('.artist-row');
-  let primaryArtist = "";
-  let allArtistsSummary = [];
-  
-  artistRows.forEach(row => {
-    const roleSelect = row.querySelector('.artist-role').value;
-    const nameInput = row.querySelector('input').value.trim();
-    if (nameInput) {
-      if (roleSelect === 'Primary Artist' && !primaryArtist) {
-        primaryArtist = nameInput;
-      }
-      allArtistsSummary.push(`${roleSelect}: ${nameInput}`);
-    }
-  });
-
-  if (!primaryArtist) {
-    primaryArtist = document.getElementById('artist-input').value.trim();
-  }
-
-  // Mengambil data dari baris-baris kredit kontributor dinamis (Composer, Producer, dll)
-  const creditRows = document.querySelectorAll('.credit-row');
-  let creditsList = [];
-  let primaryComposer = "";
-  let primaryProducer = "";
-
-  creditRows.forEach(row => {
-    const role = row.querySelector('.credit-role').value;
-    const name = row.querySelector('.credit-name').value.trim();
-    if (name) {
-      creditsList.push({ role, name });
-      if ((role === 'Composer') && !primaryComposer) primaryComposer = name;
-      if ((role === 'Producer' || role === 'Co-Producer') && !primaryProducer) primaryProducer = name;
-    }
-  });
-
-  const audioFile = document.getElementById('audio-input').files[0];
-  const coverFile = document.getElementById('cover-input').files[0];
-
-  if (!releaseTitle || !primaryArtist) {
-    alert("Mohon isi Judul Lagu dan Nama Artis Utama terlebih dahulu!");
-    return;
-  }
-
-  const submitBtn = this.querySelector('button[type="submit"]');
-  const originalBtnText = submitBtn.innerHTML;
-  submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Uploading assets...';
-  submitBtn.disabled = true;
-
-  const { data: { session }, error: sessionError } = await supabaseClient.auth.getSession();
-  if (sessionError || !session) {
-    alert("Sesi login kedaluwarsa. Silakan sign in ulang.");
-    window.location.replace('login.html');
-    return;
-  }
-
-  let audioUrl = '';
-  let coverUrl = '';
-
-  // 1. Upload File Audio ke Supabase Storage
-  if (audioFile) {
-    const audioFileName = `${session.user.id}/${Date.now()}_${audioFile.name}`;
-    const { data: audioData, error: audioError } = await supabaseClient.storage
-      .from('releases')
-      .upload(audioFileName, audioFile);
-
-    if (audioError) {
-      alert("Gagal mengunggah file audio: " + audioError.message);
-      submitBtn.innerHTML = originalBtnText;
-      submitBtn.disabled = false;
-      return;
-    }
-    audioUrl = audioData.path;
-  }
-
-  // 2. Upload Cover Art ke Supabase Storage
-  if (coverFile) {
-    const coverFileName = `${session.user.id}/${Date.now()}_${coverFile.name}`;
-    const { data: coverData, error: coverError } = await supabaseClient.storage
-      .from('releases')
-      .upload(coverFileName, coverFile);
-
-    if (coverError) {
-      alert("Gagal mengunggah cover art: " + coverError.message);
-      submitBtn.innerHTML = originalBtnText;
-      submitBtn.disabled = false;
-      return;
-    }
-    coverUrl = coverData.path;
-  }
-
-  // 3. Simpan ke Database dengan Metadata Lengkap & Data Kontributor Dinamis
-  const { error: dbError } = await supabaseClient
-    .from('releases')
-    .insert([
-      { 
-        user_id: session.user.id, 
-        title: releaseTitle, 
-        artist: primaryArtist,
-        genre: trackGenre,
-        composer: primaryComposer || (creditsList.length > 0 ? creditsList[0].name : primaryArtist),
-        producer: primaryProducer || '-',
-        pline: pLine,
-        cline: cLine,
-        upc: null, 
-        isrc: null,
-        audio_url: audioUrl,
-        cover_url: coverUrl
-      }
-    ]);
-
-  submitBtn.innerHTML = originalBtnText;
-  submitBtn.disabled = false;
-
-  if (dbError) {
-    alert("Gagal menyimpan ke database: " + dbError.message);
-  } else {
-    alert(`Berhasil! Rilis "${releaseTitle}" berhasil dikirim ke server. Menunggu sinkronisasi kode dari sistem B2B.`);
-    this.reset();
+    const releaseTitle = document.getElementById('title-input') ? document.getElementById('title-input').value : "Untitled Release";
+    const trackGenre = document.getElementById('genre') ? document.getElementById('genre').value : "Electronic";
+    const pLine = document.getElementById('pline-input') ? document.getElementById('pline-input').value : "2026 Ferwap Music Entertainment";
+    const cLine = document.getElementById('cline-input') ? document.getElementById('cline-input').value : "2026 Ferwap Music Entertainment";
     
-    document.getElementById('audio-status-text').innerText = "Click or drop audio file here";
-    document.getElementById('cover-status-text').innerText = "Click or drop cover image";
-    document.getElementById('audio-status-text').style.color = "#828ca0";
-    document.getElementById('cover-status-text').style.color = "#828ca0";
-  }
-});
+    // Mengambil data dari baris-baris artis dinamis
+    const artistRows = document.querySelectorAll('.artist-row');
+    let primaryArtist = "";
+    let allArtistsSummary = [];
+    
+    artistRows.forEach(row => {
+      const roleSelect = row.querySelector('.artist-role').value;
+      const nameInput = row.querySelector('input').value.trim();
+      if (nameInput) {
+        if (roleSelect === 'Primary Artist' && !primaryArtist) {
+          primaryArtist = nameInput;
+        }
+        allArtistsSummary.push(`${roleSelect}: ${nameInput}`);
+      }
+    });
+
+    const singleArtistInput = document.getElementById('artist-input');
+    if (!primaryArtist && singleArtistInput) {
+      primaryArtist = singleArtistInput.value.trim();
+    }
+
+    // Mengambil data dari baris-baris kredit kontributor dinamis
+    const creditRows = document.querySelectorAll('.credit-row');
+    let creditsList = [];
+    let primaryComposer = "";
+    let primaryProducer = "";
+
+    creditRows.forEach(row => {
+      const role = row.querySelector('.credit-role').value;
+      const name = row.querySelector('.credit-name').value.trim();
+      if (name) {
+        creditsList.push({ role, name });
+        if ((role === 'Composer') && !primaryComposer) primaryComposer = name;
+        if ((role === 'Producer' || role === 'Co-Producer') && !primaryProducer) primaryProducer = name;
+      }
+    });
+
+    const audioInput = document.getElementById('audio-input');
+    const coverInput = document.getElementById('cover-input');
+    const audioFile = audioInput && audioInput.files ? audioInput.files[0] : null;
+    const coverFile = coverInput && coverInput.files ? coverInput.files[0] : null;
+
+    if (!releaseTitle || !primaryArtist) {
+      alert("Mohon isi Judul Lagu dan Nama Artis Utama terlebih dahulu!");
+      return;
+    }
+
+    const submitBtn = this.querySelector('button[type="submit"]') || document.getElementById('next-btn');
+    const originalBtnText = submitBtn ? submitBtn.innerHTML : 'Submit Release';
+    if (submitBtn) {
+      submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Uploading assets...';
+      submitBtn.disabled = true;
+    }
+
+    const { data: { session }, error: sessionError } = await supabaseClient.auth.getSession();
+    if (sessionError || !session) {
+      alert("Sesi login kedaluwarsa. Silakan sign in ulang.");
+      window.location.replace('login.html');
+      return;
+    }
+
+    let audioUrl = '';
+    let coverUrl = '';
+
+    // 1. Upload File Audio ke Supabase Storage
+    if (audioFile) {
+      const audioFileName = `${session.user.id}/${Date.now()}_${audioFile.name}`;
+      const { data: audioData, error: audioError } = await supabaseClient.storage
+        .from('releases')
+        .upload(audioFileName, audioFile);
+
+      if (audioError) {
+        alert("Gagal mengunggah file audio: " + audioError.message);
+        if (submitBtn) {
+          submitBtn.innerHTML = originalBtnText;
+          submitBtn.disabled = false;
+        }
+        return;
+      }
+      audioUrl = audioData.path;
+    }
+
+    // 2. Upload Cover Art ke Supabase Storage
+    if (coverFile) {
+      const coverFileName = `${session.user.id}/${Date.now()}_${coverFile.name}`;
+      const { data: coverData, error: coverError } = await supabaseClient.storage
+        .from('releases')
+        .upload(coverFileName, coverFile);
+
+      if (coverError) {
+        alert("Gagal mengunggah cover art: " + coverError.message);
+        if (submitBtn) {
+          submitBtn.innerHTML = originalBtnText;
+          submitBtn.disabled = false;
+        }
+        return;
+      }
+      coverUrl = coverData.path;
+    }
+
+    // 3. Simpan ke Database dengan Metadata Lengkap
+    const { error: dbError } = await supabaseClient
+      .from('releases')
+      .insert([
+        { 
+          user_id: session.user.id, 
+          title: releaseTitle, 
+          artist: primaryArtist,
+          genre: trackGenre,
+          composer: primaryComposer || (creditsList.length > 0 ? creditsList[0].name : primaryArtist),
+          producer: primaryProducer || '-',
+          pline: pLine,
+          cline: cLine,
+          upc: null, 
+          isrc: null,
+          audio_url: audioUrl,
+          cover_url: coverUrl
+        }
+      ]);
+
+    if (submitBtn) {
+      submitBtn.innerHTML = originalBtnText;
+      submitBtn.disabled = false;
+    }
+
+    if (dbError) {
+      alert("Gagal menyimpan ke database: " + dbError.message);
+    } else {
+      alert(`Berhasil! Rilis "${releaseTitle}" berhasil dikirim ke server. Menunggu sinkronisasi kode dari sistem B2B.`);
+      this.reset();
+      window.location.replace('index.html');
+    }
+  });
+}
