@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Audio Upload Division - Ferwap Music</title>
+  <!-- FontAwesome untuk Icon -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body style="background: #07090f; color: #fff; font-family: sans-serif; padding: 20px;">
+
+  <!-- CONTAINER UTAMA DIVISI AUDIO -->
+  <div class="tc-card" style="max-width: 800px; margin: 0 auto; background: #111; border: 1px solid #222; padding: 24px; border-radius: 12px;">
+    
+    <!-- Header Divisi & Tombol Add Track Dinamis -->
+    <div class="card-header-tc" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+      <div style="display: flex; gap: 16px; align-items: center;">
+        <span class="step-num" style="background: #ff2a2a; color: #fff; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; flex-shrink: 0;">01</span>
+        <div>
+          <h3 style="margin: 0 0 4px 0; font-size: 16px;">Audio Files & Tracklist Division</h3>
+          <p style="margin: 0; color: #a0a0a0; font-size: 13px;">Upload master WAV/FLAC audio files for Single, EP, or Album releases.</p>
+        </div>
+      </div>
+      
+      <!-- Tombol Add Track (Otomatis Muncul jika EP / Album dipilih) -->
+      <button type="button" id="add-track-btn" onclick="addAudioTrackField()" style="display: none; background: #1f2937; color: #10b981; border: 1px solid #374151; padding: 8px 14px; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: bold;">
+        <i class="fa-solid fa-plus"></i> Add Track
+      </button>
+    </div>
+
+    <!-- Pilihan Format Rilis Khusus Divisi Audio -->
+    <div class="input-block" style="margin-bottom: 20px;">
+      <label style="display: block; font-size: 12px; color: #a0a0a0; margin-bottom: 6px;">Select Release Format</label>
+      <select id="release-format" name="release_format" onchange="toggleReleaseFormat()" style="width: 100%; padding: 12px; background: #07090f; border: 1px solid #222; color: #10b981; border-radius: 6px; box-sizing: border-box; font-weight: bold;">
+        <option value="Single">🎵 Single (1 Track)</option>
+        <option value="EP">💿 EP (Mini Album / 2–6 Tracks)</option>
+        <option value="Album">📀 Full Album (7+ Tracks)</option>
+      </select>
+    </div>
+
+    <!-- Wadah Pengunggah Audio Dinamis -->
+    <div id="audio-tracks-container" style="display: flex; flex-direction: column; gap: 16px;">
+      
+      <!-- Track 1 (Default Master Audio) -->
+      <div class="audio-track-item" style="background: #07090f; border: 1px dashed #333; padding: 16px; border-radius: 8px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+          <span class="track-label" style="font-size: 12px; font-weight: bold; color: #10b981;">Track 1 (Main Audio)</span>
+        </div>
+        
+        <!-- Input Judul Track Khusus -->
+        <input type="text" class="track-title-input" placeholder="Track 1 Title (Optional for Single)" style="width: 100%; padding: 10px; background: #111; border: 1px solid #222; color: #fff; border-radius: 6px; font-size: 12px; box-sizing: border-box; margin-bottom: 10px;">
+
+        <!-- Drag & Drop Audio Upload Box -->
+        <div class="drop-zone" onclick="this.querySelector('input[type=file]').click()" style="border: 1px dashed #222; padding: 20px; text-align: center; border-radius: 6px; cursor: pointer; background: #0b0e14;">
+          <i class="fa-solid fa-cloud-arrow-up" style="font-size: 24px; color: #a0a0a0; margin-bottom: 8px;"></i>
+          <div class="audio-status-text" style="font-size: 12px; color: #828ca0;">Click or drop audio file here (WAV / FLAC)</div>
+          <input type="file" class="audio-file-input" accept="audio/wav, audio/flac" onchange="handleSingleAudioSelect(this)" style="display: none;">
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Tombol Navigasi ke Halaman Berikutnya (Metadata) -->
+    <div style="margin-top: 24px; text-align: right;">
+      <a href="metadata.html" style="background: #ff2a2a; color: #fff; padding: 12px 24px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 13px; display: inline-block;">
+        Next: Metadata & Credits <i class="fa-solid fa-arrow-right" style="margin-left: 6px;"></i>
+      </a>
+    </div>
+
+  </div>
+
+  <!-- Memanggil Satu File JavaScript Utama -->
+  <script src="app.js"></script>
+</body>
+</html>
